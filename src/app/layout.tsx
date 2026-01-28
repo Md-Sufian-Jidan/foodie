@@ -3,6 +3,7 @@ import { Merriweather } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/providers/theme-provider"
 import Transition from "@/components/layout/Transition"
+import { Toaster } from "@/components/ui/sonner"
 
 const merriweather = Merriweather({
   subsets: ["latin"],
@@ -76,6 +77,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Transition>{children}</Transition>
+          <Toaster richColors />
         </ThemeProvider>
       </body>
     </html>
