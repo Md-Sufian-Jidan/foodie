@@ -107,7 +107,7 @@ function MenuItem({ href, children }: any) {
     )
 }
 
-export function Navbar() {
+export default function Navbar() {
     const pathname = usePathname()
     const { data } = useSession();
     console.log(data?.user);
