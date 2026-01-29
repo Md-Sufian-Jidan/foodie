@@ -15,6 +15,9 @@ import { authClient } from "@/lib/auth-client";
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
 import * as z from "zod";
+import { Eye, EyeClosed } from "lucide-react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
     email: z.string().email(),
@@ -22,6 +25,8 @@ const formSchema = z.object({
 });
 
 export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
+    const [showPassword, setShowPassword] = useState(false);
+    const router = useRouter();
     const handleGoogleLogin = async () => {
         const data = authClient.signIn.social({
             provider: "google",
@@ -48,7 +53,10 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
                     return;
                 }
 
+                console.log(data);
+
                 toast.success("User Logged in Successfully", { id: toastId });
+                router.push("/dashboard");
             } catch {
                 toast.error("Something went wrong, please try again.", { id: toastId });
             }
@@ -109,16 +117,23 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
                                     return (
                                         <Field>
                                             <FieldLabel htmlFor={field.name}>Password</FieldLabel>
-                                            <Input
-                                                type="password"
-                                                id={field.name}
-                                                name={field.name}
-                                                value={field.state.value}
-                                                onChange={(e) => field.handleChange(e.target.value)}
-                                                placeholder="********"
-                                                className={`border ${isInvalid ? "border-red-500" : "border-[#E5E7EB]"
-                                                    } focus:border-[#D97757]`}
-                                            />
+                                            <div className="relative">
+                                                <Input
+                                                    id={field.name}
+                                                    type={showPassword ? "text" : "password"}
+                                                    value={field.state.value}
+                                                    onChange={(e) => field.handleChange(e.target.value)}
+                                                    placeholder="********"
+                                                    className={`border ${isInvalid ? "border-red-500" : "border-[#E5E7EB]"
+                                                        } focus:border-[#D97757]`}
+                                                />
+                                                <div
+                                                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1"
+                                                    onClick={() => setShowPassword(!showPassword)}
+                                                >
+                                                    {showPassword ? <Eye /> : <EyeClosed />}
+                                                </div>
+                                            </div>
                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                         </Field>
                                     );
@@ -129,7 +144,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
                 </CardContent>
 
                 <CardFooter className="flex flex-col gap-4 px-6 py-6 sm:px-10">
-                    <Button form="login-form" type="submit" className="w-full bg-[#D97757] hover:bg-[#c96a4f] text-white py-3">
+                    <Button form="login-form" type="submit" className="w-full bg-[#D97757] hover:bg-[#c96a4f] text-white py-3 hover:cursor-pointer">
                         Log In
                     </Button>
 

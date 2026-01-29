@@ -49,7 +49,7 @@ export default function Hero() {
                         <Button
                             asChild
                             variant="outline"
-                            className="border-[#6B8E7D] px-6 py-6 text-base text-[#6B8E7D] hover:bg-[#6B8E7D] hover:text-white"
+                            className="border-[#D97757] px-6 py-6 text-base hover:bg-[#D97757] hover:text-white"
                         >
                             <Link href="/register">Become a Provider</Link>
                         </Button>

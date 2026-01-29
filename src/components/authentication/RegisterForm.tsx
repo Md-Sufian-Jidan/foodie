@@ -18,6 +18,8 @@ import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner";
 import * as z from "zod";
 import { authClient } from "@/lib/auth-client";
+import { Eye, EyeClosed } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 // Zod validation schema
 const formSchema = z.object({
@@ -35,6 +37,7 @@ const formSchema = z.object({
 export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const router = useRouter();
 
     const form = useForm({
         defaultValues: {
@@ -51,14 +54,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
         onSubmit: async ({ value }) => {
             const toastId = toast.loading("Registering...");
             try {
-                const { data, error } = await authClient.signUp.email({
-                    email: value.email,
-                    password: value.password,
-                    userMetadata: {
-                        name: value.name,
-                        role: value.role,
-                    },
-                });
+                const { data, error } = await authClient.signUp.email(value);
 
                 if (error) {
                     toast.error(error.message, { id: toastId });
@@ -66,6 +62,10 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                 }
 
                 toast.success("Registered Successfully!", { id: toastId });
+                console.log(data);
+                setTimeout(() => {
+                    router.push("/login");
+                }, 1200);
             } catch {
                 toast.error("Something went wrong, please try again.", { id: toastId });
             }
@@ -80,7 +80,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
             >
                 <CardHeader className="bg-[#D97757] text-white text-center py-6">
                     <CardTitle className="font-heading text-2xl">Create an Account</CardTitle>
-                    <CardDescription className="font-body text-sm mt-1">
+                    <CardDescription className="font-body text-white text-sm mt-1">
                         Join MealMate to order meals or become a provider
                     </CardDescription>
                 </CardHeader>
@@ -179,14 +179,12 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                                                     className={`border ${isInvalid ? "border-red-500" : "border-[#E5E7EB]"
                                                         } focus:border-[#D97757]`}
                                                 />
-                                                <Button
-                                                    type="button"
-                                                    variant="ghost"
+                                                <div
                                                     className="absolute right-2 top-1/2 -translate-y-1/2 p-1"
                                                     onClick={() => setShowPassword(!showPassword)}
                                                 >
-                                                    {showPassword ? "Hide" : "Show"}
-                                                </Button>
+                                                    {showPassword ? <Eye /> : <EyeClosed />}
+                                                </div>
                                             </div>
                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                         </Field>
@@ -212,14 +210,12 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                                                     className={`border ${isInvalid ? "border-red-500" : "border-[#E5E7EB]"
                                                         } focus:border-[#D97757]`}
                                                 />
-                                                <Button
-                                                    type="button"
-                                                    variant="ghost"
+                                                <div
                                                     className="absolute right-2 top-1/2 -translate-y-1/2 p-1"
                                                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                                                 >
-                                                    {showConfirmPassword ? "Hide" : "Show"}
-                                                </Button>
+                                                    {showConfirmPassword ? <Eye /> : <EyeClosed />}
+                                                </div>
                                             </div>
                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                         </Field>
@@ -231,16 +227,27 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                             <form.Field
                                 name="terms"
                                 children={(field) => (
-                                    <Field>
-                                        <Checkbox
-                                            checked={field.state.value}
-                                            onCheckedChange={(val) => field.handleChange(Boolean(val))}
-                                        />
-                                        <FieldLabel className="inline ml-2">
-                                            I agree to the <a href="/terms" className="text-[#D97757] underline">Terms and Conditions</a>
-                                        </FieldLabel>
-                                        {field.state.meta.errors.length > 0 && (
-                                            <FieldError errors={field.state.meta.errors} />
+                                    <Field className="flex flex-col gap-2">
+                                        <div className="flex items-center space-x-2">
+                                            <Checkbox
+                                                id={field.name}
+                                                checked={field.state.value}
+                                                onCheckedChange={(val) => field.handleChange(Boolean(val))}
+                                                // Terracotta styling for the checkbox
+                                                className="border-[#6B7280] data-[state=checked]:bg-[#D97757] data-[state=checked]:border-[#D97757] dark:data-[state=checked]:bg-[#E08B6B] dark:data-[state=checked]:border-[#E08B6B]"
+                                            />
+                                            <FieldLabel
+                                                htmlFor={field.name}
+                                                className="text-sm font-jakarta text-[#1F2933] dark:text-[#F5F4F2] leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                            >
+                                                I agree to the{" "}
+                                                <a href="/terms" className="text-[#D97757] dark:text-[#E08B6B] underline hover:opacity-80 transition-opacity">
+                                                    Terms and Conditions
+                                                </a>
+                                            </FieldLabel>
+                                        </div>
+                                        {field.state.meta.isTouched && field.state.meta.errors.length > 0 && (
+                                            <FieldError className="text-[#D97757] text-xs" errors={field.state.meta.errors} />
                                         )}
                                     </Field>
                                 )}
@@ -253,7 +260,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                     <Button
                         form="register-form"
                         type="submit"
-                        className="w-full bg-[#D97757] hover:bg-[#c96a4f] text-white py-3"
+                        className="w-full bg-[#D97757] hover:bg-[#c96a4f] text-white py-3 hover:cursor-pointer"
                         onClick={() => form.handleSubmit()}
                     >
                         Register

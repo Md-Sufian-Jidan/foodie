@@ -1,35 +1,32 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { cn } from "@/lib/utils"
-import { ModeToggle } from "./ModeToggle"
-
-// replace with better-auth hook
-import { useSession, signOut } from "@/lib/auth-client"
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
+import { ModeToggle } from "./ModeToggle";
+import { authClient } from "@/lib/auth-client";
 
 const navLinks = [
     { label: "Browse Meals", href: "/meals" },
-]
-
+];
 
 function NavLink({
     href,
     children,
     active,
 }: {
-    href: string
-    children: React.ReactNode
-    active?: boolean
+    href: string;
+    children: React.ReactNode;
+    active?: boolean;
 }) {
     return (
         <Link
@@ -47,56 +44,7 @@ function NavLink({
                 />
             )}
         </Link>
-    )
-}
-
-function UserMenu({
-    role,
-    name,
-}: {
-    role: "customer" | "provider" | "admin"
-    name: string
-}) {
-    return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Avatar className="cursor-pointer">
-                    <AvatarFallback>
-                        {name.charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                </Avatar>
-            </DropdownMenuTrigger>
-
-            <DropdownMenuContent align="end" className="w-48">
-                {role === "customer" && (
-                    <>
-                        <MenuItem href="/cart">Cart</MenuItem>
-                        <MenuItem href="/orders">Orders</MenuItem>
-                        <MenuItem href="/profile">Profile</MenuItem>
-                    </>
-                )}
-
-                {role === "provider" && (
-                    <>
-                        <MenuItem href="/provider/dashboard">Dashboard</MenuItem>
-                        <MenuItem href="/provider/menu">Menu</MenuItem>
-                        <MenuItem href="/provider/orders">Orders</MenuItem>
-                    </>
-                )}
-
-                {role === "admin" && (
-                    <MenuItem href="/admin">Admin Dashboard</MenuItem>
-                )}
-
-                <DropdownMenuItem
-                    className="text-red-500 cursor-pointer"
-                    onClick={() => signOut()}
-                >
-                    Logout
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
-    )
+    );
 }
 
 function MenuItem({ href, children }: any) {
@@ -104,24 +52,61 @@ function MenuItem({ href, children }: any) {
         <DropdownMenuItem asChild>
             <Link href={href}>{children}</Link>
         </DropdownMenuItem>
-    )
+    );
+}
+
+function UserMenu({
+    role,
+    name,
+}: {
+    role: "CUSTOMER" | "PROVIDER" | "ADMIN";
+    name: string;
+}) {
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Avatar className="cursor-pointer">
+                    <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+                </Avatar>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent align="end" className="w-48">
+                {role === "CUSTOMER" && (
+                    <>
+                        <MenuItem href="/cart">Cart</MenuItem>
+                        <MenuItem href="/orders">Orders</MenuItem>
+                        <MenuItem href="/profile">Profile</MenuItem>
+                    </>
+                )}
+
+                {role === "PROVIDER" && (
+                    <>
+                        <MenuItem href="/provider/dashboard">Dashboard</MenuItem>
+                        <MenuItem href="/provider/menu">Menu</MenuItem>
+                        <MenuItem href="/provider/orders">Orders</MenuItem>
+                    </>
+                )}
+
+                {role === "ADMIN" && (
+                    <MenuItem href="/admin">Admin Dashboard</MenuItem>
+                )}
+
+                <DropdownMenuItem
+                    className="cursor-pointer text-red-500"
+                    onClick={async () => {
+                        await authClient.signOut();
+                    }}
+                >
+                    Logout
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    );
 }
 
 export default function Navbar() {
-    const pathname = usePathname()
-    const { data } = useSession();
-    console.log(data?.user);
-
-    interface Roles {
-        admin: "ADMIN";
-        customer: "CUSTOMER"
-    }
-
-    const isAuthenticated = false;
-    const user = {
-        role: "ADMIN",
-        name: "SUFIAN"
-    }
+    const pathname = usePathname();
+    const { data: session, isPending } = authClient.useSession();
 
     return (
         <motion.header
@@ -131,18 +116,14 @@ export default function Navbar() {
             className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur"
         >
             <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
-
                 {/* Logo */}
-                <Link
-                    href="/"
-                    className="font-serif text-xl font-bold text-foreground"
-                >
+                <Link href="/" className="font-serif text-xl font-bold">
                     MealMate
                 </Link>
 
                 {/* Desktop Nav */}
                 <div className="hidden items-center gap-6 md:flex">
-                    {navLinks.map(link => (
+                    {navLinks.map((link) => (
                         <NavLink
                             key={link.href}
                             href={link.href}
@@ -153,11 +134,16 @@ export default function Navbar() {
                     ))}
                 </div>
 
-                {/* Right side */}
+                {/* Right */}
                 <div className="flex items-center gap-3">
                     <ModeToggle />
 
-                    {!isAuthenticated ? (
+                    {isPending ? null : session?.user ? (
+                        <UserMenu
+                            name={session.user.name}
+                            role={session.user.role}
+                        />
+                    ) : (
                         <>
                             <Button variant="ghost" asChild>
                                 <Link href="/login">Login</Link>
@@ -166,11 +152,9 @@ export default function Navbar() {
                                 <Link href="/register">Register</Link>
                             </Button>
                         </>
-                    ) : (
-                        <UserMenu role={user.role} name={user.name} />
                     )}
                 </div>
             </nav>
         </motion.header>
-    )
+    );
 }
