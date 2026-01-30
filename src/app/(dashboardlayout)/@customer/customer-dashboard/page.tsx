@@ -42,7 +42,7 @@ export default function CustomerDashboard() {
   }
 
   return (
-    <div className="space-y-8 p-4 lg:p-8 dark:bg-[#121110] min-h-screen">
+    <div className="space-y-8 p-4 lg:p-8 dark:bg-[#121110] min-h-screen bg-[#FAF9F7] rounded-4xl">
       <header className="space-y-2">
         <motion.h1
           initial={{ opacity: 0, x: -20 }}

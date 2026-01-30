@@ -19,7 +19,7 @@ export default function StatCard({ title, value }: StatCardProps) {
             }}
             className="group"
         >
-            <Card className="overflow-hidden border-none shadow-sm bg-[#FAF9F7] dark:bg-[#1C1A18] relative">
+            <Card className="overflow-hidden border-none shadow-sm bg-white dark:bg-[#1C1A18] relative">
                 {/* Decorative accent that glows on hover */}
                 <div className="absolute top-0 left-0 w-1 h-full bg-[#D97757] opacity-0 group-hover:opacity-100 transition-opacity" />
 
@@ -39,7 +39,7 @@ export default function StatCard({ title, value }: StatCardProps) {
                         </motion.p>
 
                         {/* Subtle indicator for a "food/meal" vibe */}
-                        <span className="text-[#6B8E7D] text-sm font-medium">
+                        <span className="text-[#D97757] text-sm font-medium">
                             +12%
                         </span>
                     </div>

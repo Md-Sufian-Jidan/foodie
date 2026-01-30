@@ -20,7 +20,7 @@ export default function OrderCard({ order }: { order: Order }) {
             whileHover={{ y: -2 }}
             transition={{ duration: 0.2 }}
         >
-            <Card className="group flex items-center justify-between p-5 border-none shadow-sm bg-[#FAF9F7] dark:bg-[#1C1A18] hover:shadow-md transition-all">
+            <Card className="group flex items-center justify-between p-5 border-none shadow-sm bg-white dark:bg-[#1C1A18] hover:shadow-md transition-all">
                 <div className="space-y-1.5">
                     <div className="flex items-center gap-2">
                         <h3 className="font-serif text-lg font-bold text-[#1F2933] dark:text-[#F5F4F2]">

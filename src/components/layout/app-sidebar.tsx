@@ -32,8 +32,8 @@ const NAV: Record<Role, any[]> = {
       label: "Provider",
       items: [
         { title: "Dashboard", href: "/provider-dashboard" },
-        { title: "Menu", href: "/menu" },
-        { title: "Orders", href: "/orders" },
+        { title: "Menu", href: "/provider-dashboard/menu" },
+        { title: "Orders", href: "/provider-dashboard/orders" },
       ],
     },
   ],
@@ -42,8 +42,8 @@ const NAV: Record<Role, any[]> = {
       label: "Admin",
       items: [
         { title: "Dashboard", href: "/admin-dashboard" },
-        { title: "Users", href: "/users" },
-        { title: "Categories", href: "/categories" },
+        { title: "Users", href: "/admin-dashboard/users" },
+        { title: "Categories", href: "/admin-dashboard/categories" },
       ],
     },
   ],

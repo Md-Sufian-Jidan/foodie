@@ -41,7 +41,7 @@ const containerVariants = {
 
 export default function OrdersPage() {
     return (
-        <div className="min-h-screen dark:bg-[#121110] p-6 lg:p-10 space-y-10">
+        <div className="min-h-screen bg-[#FAF9F7] dark:bg-[#121110] p-6 lg:p-10 space-y-10 rounded-4xl">
             {/* Header Section */}
             <header className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div className="space-y-2">

@@ -24,7 +24,7 @@ export default function CartPage() {
     };
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 bg-[#FAF9F7] rounded-4xl p-5">
             <h1 className="font-serif text-3xl font-bold">
                 My Cart
             </h1>
