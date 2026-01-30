@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Edit3, Trash2, Plus, CheckCircle2, Clock, ChefHat } from "lucide-react";
+import Link from "next/link";
 
 // --- Types ---
 type Meal = {
@@ -40,7 +41,7 @@ export default function ProviderManagementPage() {
     if (!data || data.user.role !== "PROVIDER") redirect("/login");
 
     return (
-        <div className="max-w-7xl mx-auto space-y-8 p-4 lg:p-8 bg-[#FAF9F7] dark:bg-[#121110] min-h-screen rounded-4xl">
+        <div className="space-y-8 p-4 lg:p-8 bg-[#FAF9F7] dark:bg-[#121110] min-h-screen rounded-4xl">
 
             {/* Dynamic Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -50,9 +51,11 @@ export default function ProviderManagementPage() {
                     </h1>
                     <p className="text-[#6B7280] font-jakarta">Welcome back, Chef {data.user.name.split(' ')[0]}</p>
                 </div>
-                <Button className="bg-[#D97757] hover:bg-[#D97757]/90 text-white rounded-full shadow-lg h-12 px-6">
-                    <Plus className="mr-2 h-5 w-5" /> New Creation
-                </Button>
+                <Link href='/provider-dashboard/create-meal'>
+                    <Button className="bg-[#D97757] hover:bg-[#D97757]/90 text-white rounded-full shadow-lg h-12 px-6 hover:cursor-pointer">
+                        <Plus className="mr-2 h-5 w-5" /> New Creation
+                    </Button>
+                </Link>
             </div>
 
             <Tabs defaultValue="orders" className="w-full">

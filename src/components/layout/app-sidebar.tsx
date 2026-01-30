@@ -34,6 +34,7 @@ const NAV: Record<Role, any[]> = {
         { title: "Dashboard", href: "/provider-dashboard" },
         { title: "Menu", href: "/provider-dashboard/menu" },
         { title: "Orders", href: "/provider-dashboard/orders" },
+        { title: "Add A Meal", href: "/provider-dashboard/create-meal" },
       ],
     },
   ],

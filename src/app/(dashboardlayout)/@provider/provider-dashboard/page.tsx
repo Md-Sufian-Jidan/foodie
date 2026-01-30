@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { PlusCircle, Utensils, TrendingUp, Clock } from "lucide-react";
 import OrdersChart from "@/components/modules/customer/customer-dashboard/OrdersChat";
+import Link from "next/link";
 
 export default function ProviderDashboard() {
     const { data, isPending } = useSession();
@@ -56,10 +57,12 @@ export default function ProviderDashboard() {
                         <Clock className="mr-2 h-4 w-4" />
                         Kitchen Status: Open
                     </Button>
-                    <Button className="bg-[#D97757] hover:bg-[#D97757]/90 text-white shadow-md">
-                        <PlusCircle className="mr-2 h-4 w-4" />
-                        Add New Dish
-                    </Button>
+                    <Link href='/provider-dashboard/create-meal'>
+                        <Button className="bg-[#D97757] hover:bg-[#D97757]/90 text-white shadow-md hover:cursor-pointer">
+                            <PlusCircle className="mr-2 h-4 w-4" />
+                            Add New Dish
+                        </Button>
+                    </Link>
                 </div>
             </header>
 
