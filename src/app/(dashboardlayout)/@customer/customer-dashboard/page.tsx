@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import StatCard from "@/components/modules/customer-dashboard/StatCard";
 import { useSession } from "@/lib/auth-client";
-import OrdersChart from "@/components/modules/customer-dashboard/OrdersChat";
 import { motion } from "framer-motion";
+import StatCard from "@/components/modules/customer/customer-dashboard/StatCard";
+import OrdersChart from "@/components/modules/customer/customer-dashboard/OrdersChat";
 
 type Stats = {
   totalOrders: number;

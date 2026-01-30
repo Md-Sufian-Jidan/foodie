@@ -74,9 +74,9 @@ function UserMenu({
                 {role === "CUSTOMER" && (
                     <>
                         <MenuItem href="/customer-dashboard">Dashboard</MenuItem>
-                        <MenuItem href="/cart">Cart</MenuItem>
-                        <MenuItem href="/orders">Orders</MenuItem>
-                        <MenuItem href="/profile">Profile</MenuItem>
+                        <MenuItem href="/customer-dashboard/cart">Cart</MenuItem>
+                        <MenuItem href="/customer-dashboard/orders">Orders</MenuItem>
+                        <MenuItem href="/customer-dashboard/profile">Profile</MenuItem>
                     </>
                 )}
 

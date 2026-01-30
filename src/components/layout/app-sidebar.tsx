@@ -21,8 +21,9 @@ const NAV: Record<Role, any[]> = {
       label: "Customer",
       items: [
         { title: "Dashboard", href: "/customer-dashboard" },
-        { title: "Orders", href: "/orders" },
-        { title: "Profile", href: "/profile" },
+        { title: "Cart", href: "/customer-dashboard/cart" },
+        { title: "Orders", href: "/customer-dashboard/orders" },
+        { title: "Profile", href: "/customer-dashboard/profile" },
       ],
     },
   ],
