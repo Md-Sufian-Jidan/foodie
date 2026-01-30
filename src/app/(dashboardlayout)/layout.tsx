@@ -1,60 +1,62 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
+"use client";
+
+import { AppSidebar } from "@/components/layout/app-sidebar";
 import {
     SidebarInset,
     SidebarProvider,
     SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { Separator } from "@/components/ui/separator";
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbList,
+    BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
+import { useSession } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
-const userInfo = {
-    role: "CUSTOMER"
-}
-
-export default async function DashboardLayout({
+export default function DashboardLayout({
     admin,
-    user,
+    customer,
+    provider,
 }: {
-    children: React.ReactNode;
     admin: React.ReactNode;
-    user: React.ReactNode;
+    customer: React.ReactNode;
+    provider: React.ReactNode;
 }) {
+    const { data, isPending } = useSession();
+    const router = useRouter();
+
+    if (isPending) return null;
+
+    if (!data) {
+        router.replace("/login");
+        return null;
+    }
+
+    const role = data.user.role;
     return (
         <SidebarProvider>
-            <AppSidebar />
+            <AppSidebar role={role} />
             <SidebarInset>
-                <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-                    <SidebarTrigger className="-ml-1" />
-                    <Separator
-                        orientation="vertical"
-                        className="mr-2 data-[orientation=vertical]:h-4"
-                    />
+                <header className="flex h-16 items-center gap-2 border-b px-4">
+                    <SidebarTrigger />
+                    <Separator orientation="vertical" className="h-4" />
                     <Breadcrumb>
                         <BreadcrumbList>
-                            <BreadcrumbItem className="hidden md:block">
-                                <BreadcrumbLink href="#">
-                                    Building Your Application
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator className="hidden md:block" />
                             <BreadcrumbItem>
-                                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                                <BreadcrumbPage>Dashboard</BreadcrumbPage>
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
                 </header>
-                <div className="flex flex-1 flex-col gap-4 p-4">
-                    {userInfo.role === "ADMIN" && "admin"}
-                    {userInfo.role === "CUSTOMER" && "admin"}
-                    {userInfo.role === "PROVIDER" && "PROVIDER"}
-                </div>
+
+                <main className="flex flex-1 flex-col gap-4 p-4">
+                    {role === "ADMIN" && admin}
+                    {role === "CUSTOMER" && customer}
+                    {role === "PROVIDER" && provider}
+                </main>
             </SidebarInset>
         </SidebarProvider>
     );

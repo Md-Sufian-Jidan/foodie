@@ -73,6 +73,7 @@ function UserMenu({
             <DropdownMenuContent align="end" className="w-48">
                 {role === "CUSTOMER" && (
                     <>
+                        <MenuItem href="/customer-dashboard">Dashboard</MenuItem>
                         <MenuItem href="/cart">Cart</MenuItem>
                         <MenuItem href="/orders">Orders</MenuItem>
                         <MenuItem href="/profile">Profile</MenuItem>
@@ -81,14 +82,17 @@ function UserMenu({
 
                 {role === "PROVIDER" && (
                     <>
-                        <MenuItem href="/provider/dashboard">Dashboard</MenuItem>
+                        <MenuItem href="/provider-dashboard">Dashboard</MenuItem>
                         <MenuItem href="/provider/menu">Menu</MenuItem>
                         <MenuItem href="/provider/orders">Orders</MenuItem>
                     </>
                 )}
 
                 {role === "ADMIN" && (
-                    <MenuItem href="/admin">Admin Dashboard</MenuItem>
+                    <>
+                        <MenuItem href="/admin-dashboard">Admin Dashboard</MenuItem>
+                        <MenuItem href="/all-users">All Users</MenuItem>
+                    </>
                 )}
 
                 <DropdownMenuItem
