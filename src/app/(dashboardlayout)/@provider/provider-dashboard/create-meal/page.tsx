@@ -33,8 +33,6 @@ type FormType = z.infer<typeof formSchema>;
 
 export default function NewMealPage() {
     const router = useRouter();
-
-    // 2. Form with explicit types and Zod Adapter
     const form = useForm({
         defaultValues: {
             name: "",
@@ -46,7 +44,6 @@ export default function NewMealPage() {
         onSubmit: async ({ value }) => {
             const toastId = toast.loading("Adding to menu...");
             try {
-                // Ensure price is a number and categoryId is a string
                 const { error } = await mealService.addMeal({
                     ...value,
                     price: Number(value.price),
@@ -58,7 +55,7 @@ export default function NewMealPage() {
                 }
 
                 toast.success("New dish added to your kitchen!", { id: toastId });
-                router.push("/provider/menu");
+                router.push("/provider-dashboard/menu");
             } catch {
                 toast.error("Failed to connect to kitchen", { id: toastId });
             }
@@ -87,7 +84,14 @@ export default function NewMealPage() {
                         {/* Name Field */}
                         <form.Field
                             name="name"
-                            validators={{ onChange: formSchema.shape.name }}
+                            validators={{
+                                onChange: ({ value }) => {
+                                    const result = formSchema.shape.name.safeParse(value);
+                                    if (!result.success) {
+                                        return result.error.issues;
+                                    }
+                                }
+                            }}
                             children={(field) => (
                                 <div className="space-y-2">
                                     <label className="flex items-center gap-2 text-sm font-bold text-[#1F2933] dark:text-[#F5F4F2] font-jakarta uppercase tracking-wider">
@@ -200,7 +204,7 @@ export default function NewMealPage() {
                             </Button>
                             <Button
                                 type="submit"
-                                className="flex-[2] bg-[#D97757] hover:bg-[#D97757]/90 text-white rounded-full h-12 shadow-lg shadow-[#D97757]/20"
+                                className="flex-1 bg-[#D97757] hover:bg-[#D97757]/90 text-white rounded-full h-12 shadow-lg shadow-[#D97757]/20"
                             >
                                 Publish to Menu
                             </Button>
@@ -212,15 +216,14 @@ export default function NewMealPage() {
     );
 }
 
-// Helper component for errors
 function FieldError({ field }: { field: any }) {
+    const error = field.state.meta.errors?.[0];
+
+    if (!error) return <div className="min-h-[20px]" />;
+
     return (
-        <div className="min-h-[20px]">
-            {field.state.meta.errors.length > 0 && (
-                <p className="text-red-500 text-xs font-medium animate-in fade-in slide-in-from-top-1">
-                    {field.state.meta.errors[0]}
-                </p>
-            )}
-        </div>
+        <p className="text-red-500 text-xs font-medium animate-in fade-in slide-in-from-top-1">
+            {typeof error === "string" ? error : error.message}
+        </p>
     );
 }

@@ -1,45 +1,96 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.API_URL || "http://localhost:5000";
+
+export interface CategoryData {
+    name: string;
+    image?: string;
+    description?: string;
+}
 
 export const adminService = {
-    getStatistics: async () => {
-        // Fake data for now
-        return {
-            data: { totalUsers: 120, totalOrders: 50, totalProviders: 12 },
-            error: null,
-        };
+    /**
+     * Create a new category
+     * Required Role: ADMIN
+     */
+    async createCategory(categoryData: CategoryData) {
+        try {
+            const res = await fetch(`${API_URL}/api/v1/admin/categories`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify(categoryData),
+            });
+
+            const data = await res.json();
+            if (!res.ok) return { data: null, error: data };
+
+            return { data, error: null };
+        } catch (error: any) {
+            return { data: null, error };
+        }
     },
 
-    getUsers: async () => {
-        return {
-            data: [
-                { id: "1", name: "Alice", email: "alice@mail.com", role: "CUSTOMER", isActive: true },
-                { id: "2", name: "Bob", email: "bob@mail.com", role: "PROVIDER", isActive: false },
-            ],
-            error: null,
-        };
+    async getCategories() {
+        try {
+            // cookieHeader?: string
+            const res = await fetch(`http://localhost:5000/api/v1/admin/get-all-category`, {
+                method: "GET",
+                cache: "no-store",
+                // headers: cookieHeader ? { "Cookie": cookieHeader } : {}
+            });
+
+            if (!res.ok) {
+                // Better error reporting
+                const errorData = await res.json().catch(() => ({}));
+                return { data: null, error: errorData.message || "Failed to fetch categories" };
+            }
+
+            const data = await res.json();
+            return { data, error: null };
+        } catch (error: any) {
+            console.error("GET_CATEGORIES_ERROR:", error);
+            return { data: null, error };
+        }
     },
 
-    updateUserStatus: async (id: string, isActive: boolean) => {
-        return { data: { id, isActive }, error: null };
+    /**
+     * Update an existing category
+     * Required Role: ADMIN
+     */
+    async updateCategory(id: string, categoryData: Partial<CategoryData>) {
+        try {
+            const res = await fetch(`${API_URL}/api/v1/admin/categories/${id}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify(categoryData),
+            });
+
+            const data = await res.json();
+            if (!res.ok) return { data: null, error: data };
+
+            return { data, error: null };
+        } catch (error: any) {
+            return { data: null, error };
+        }
     },
 
-    getOrders: async () => {
-        return {
-            data: [
-                { id: "1", userName: "Alice", totalAmount: 25.5, status: "DELIVERED", createdAt: new Date() },
-                { id: "2", userName: "Bob", totalAmount: 15.0, status: "PENDING", createdAt: new Date() },
-            ],
-            error: null,
-        };
-    },
+    /**
+     * Delete a category
+     * Required Role: ADMIN
+     */
+    async deleteCategory(id: string) {
+        try {
+            const res = await fetch(`${API_URL}/api/v1/admin/categories/${id}`, {
+                method: "DELETE",
+                credentials: "include",
+            });
 
-    getCategories: async () => {
-        return {
-            data: [
-                { id: "1", name: "Italian" },
-                { id: "2", name: "Chinese" },
-            ],
-            error: null,
-        };
+            const data = await res.json();
+            if (!res.ok) return { data: null, error: data };
+
+            return { data, error: null };
+        } catch (error: any) {
+            return { data: null, error };
+        }
     },
 };
