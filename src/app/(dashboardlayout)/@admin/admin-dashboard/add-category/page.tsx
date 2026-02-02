@@ -8,18 +8,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-// ---------------- Schema ----------------
 const categorySchema = z.object({
     name: z.string().min(2, "Category name must be at least 2 characters"),
 });
 
-type CategoryForm = z.infer<typeof categorySchema>;
-
-// ---------------- Page ----------------
 export default function AdminCategoriesPage() {
     const router = useRouter();
 
-    const form = useForm<CategoryForm>({
+    const form = useForm({
         defaultValues: {
             name: "",
         },
