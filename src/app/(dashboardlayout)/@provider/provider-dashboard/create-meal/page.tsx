@@ -127,7 +127,7 @@ export default function NewMealPage() {
                                             </SelectTrigger>
                                             <SelectContent>
                                                 {categories.map((cat) => (
-                                                    <SelectItem key={cat.id} value={cat.id}>{cat.name}</SelectItem>
+                                                    <SelectItem key={cat.id} value={`${cat.id}`}>{cat.name}</SelectItem>
                                                 ))}
                                             </SelectContent>
                                         </Select>

@@ -38,7 +38,9 @@ export default function ProviderManagementPage() {
     };
 
     if (isPending) return <div className="flex justify-center p-20 animate-pulse text-[#D97757]">Loading Kitchen...</div>;
-    if (!data || data.user.role !== "PROVIDER") redirect("/login");
+
+    console.log(req.);
+    if (!data || data.user?.role !== "PROVIDER") redirect("/login");
 
     return (
         <div className="space-y-8 p-4 lg:p-8 bg-[#FAF9F7] dark:bg-[#121110] min-h-screen rounded-4xl">

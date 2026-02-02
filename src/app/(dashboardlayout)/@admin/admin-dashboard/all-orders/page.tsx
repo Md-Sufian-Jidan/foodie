@@ -29,9 +29,9 @@ export default function OrdersPage() {
 
     useEffect(() => {
         async function fetchOrders() {
-            const { data } = await adminService.getOrders();
+
             // Fallback mock data for visual consistency
-            setOrders(data || [
+            setOrders([
                 { id: "ORD-7721", userName: "Marcus Wright", totalAmount: 45.50, status: "DELIVERED", createdAt: "2026-01-28" },
                 { id: "ORD-7722", userName: "Elena Rodriguez", totalAmount: 128.00, status: "PREPARING", createdAt: "2026-01-30" },
                 { id: "ORD-7723", userName: "James Wilson", totalAmount: 12.99, status: "PENDING", createdAt: "2026-01-31" },
