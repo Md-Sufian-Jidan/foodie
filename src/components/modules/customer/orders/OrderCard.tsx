@@ -5,16 +5,20 @@ import { Card } from "@/components/ui/card";
 import { OrderStatusBadge } from "./OrderStatusBadge";
 import { motion } from "framer-motion";
 import { CalendarDays, ShoppingBag } from "lucide-react";
+import { OrderStatus } from "@/constants/role";
 
 type Order = {
     id: string;
     total: number;
-    status: string;
+    status: OrderStatus;
     createdAt: string;
     itemsCount: number;
 };
 
+// : { order: Order }
+
 export default function OrderCard({ order }: { order: Order }) {
+
     return (
         <motion.div
             whileHover={{ y: -2 }}

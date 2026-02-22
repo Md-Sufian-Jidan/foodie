@@ -27,13 +27,13 @@ const formSchema = z.object({
 export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
     const [showPassword, setShowPassword] = useState(false);
     const router = useRouter();
-    const handleGoogleLogin = async () => {
-        const data = authClient.signIn.social({
-            provider: "google",
-            callbackURL: "http://localhost:3000",
-        });
-        console.log(data);
-    };
+    // const handleGoogleLogin = async () => {
+    //     const data = authClient.signIn.social({
+    //         provider: "google",
+    //         callbackURL: "http://localhost:3000",
+    //     });
+    //     console.log(data);
+    // };
 
     const form = useForm({
         defaultValues: {
@@ -146,14 +146,14 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
                         Log In
                     </Button>
 
-                    <Button
+                    {/* <Button
                         onClick={() => handleGoogleLogin()}
                         variant="outline"
                         type="button"
                         className="w-full py-3"
                     >
                         Continue with Google
-                    </Button>
+                    </Button> */}
 
                     <p className="text-center text-sm font-body text-[#6B7280] mt-2">
                         Don’t have an account?{" "}

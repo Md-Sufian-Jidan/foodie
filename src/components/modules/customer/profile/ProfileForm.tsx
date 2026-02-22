@@ -29,10 +29,7 @@ export default function ProfileForm({ user }: { user: any }) {
             password: "",
             confirmPassword: "",
         },
-        validators: {
-            onSubmit: formSchema,
-        },
-        onSubmit: async ({ value }) => {
+        onSubmit: async (   { value }) => {
             const toastId = toast.loading("Updating profile...");
             if (value.password && value.password !== value.confirmPassword) {
                 toast.error("Passwords do not match", { id: toastId });

@@ -27,19 +27,18 @@ import { Input } from "@/components/ui/input";
 export default function OrdersPage() {
     const [orders, setOrders] = useState<any[]>([]);
 
-    useEffect(() => {
-        async function fetchOrders() {
-
-            // Fallback mock data for visual consistency
-            setOrders([
-                { id: "ORD-7721", userName: "Marcus Wright", totalAmount: 45.50, status: "DELIVERED", createdAt: "2026-01-28" },
-                { id: "ORD-7722", userName: "Elena Rodriguez", totalAmount: 128.00, status: "PREPARING", createdAt: "2026-01-30" },
-                { id: "ORD-7723", userName: "James Wilson", totalAmount: 12.99, status: "PENDING", createdAt: "2026-01-31" },
-            ]);
+    const getAllOrders = async () => {
+        const { data, error } = await adminService.getAllOrders();
+        if (error) {
+            // console.error("Failed to fetch orders:", error);
+            return;
         }
-        fetchOrders();
-    }, []);
+        setOrders(data.data);
+    }
 
+    useEffect(() => {
+        getAllOrders();
+    }, []);
     return (
         <div className="space-y-8 p-4 lg:p-8 bg-[#FAF9F7] dark:bg-[#121110] min-h-screen font-jakarta rounded-4xl">
             {/* Page Header */}

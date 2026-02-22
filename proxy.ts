@@ -1,32 +1,48 @@
 import { Roles } from "@/constants/role";
+import { publicRoutes } from "@/routes/PublicRoutes";
 import { userService } from "@/services/user.service";
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
+const roleDashboardMap: Record<string, string> = {
+    [Roles.ADMIN]: "/admin-dashboard",
+    [Roles.CUSTOMER]: "/dashboard",
+    [Roles.PROVIDER]: "/provider-dashboard",
+};
 export async function proxy(request: NextRequest) {
-    const { pathname } = request.nextUrl;
-
+    const pathname = request.nextUrl.pathname;
     const { data } = await userService.getSession();
+    const user = data?.user;
+    const isAuthenticated = !!user;
 
-    // 🔐 Not authenticated
-    if (!data) {
+    if (!isAuthenticated && publicRoutes.includes(pathname)) {
+        return NextResponse.next();
+    }
+
+    if (!isAuthenticated) {
         return NextResponse.redirect(new URL("/login", request.url));
     }
 
-    const role = data.user.role;
+    const userRole = user?.role;
+    const allowedDashboard = roleDashboardMap[userRole];
 
-    // 🛡️ Admin routes
-    if (pathname.startsWith("/admin-dashboard") && role !== Roles.admin) {
-        return NextResponse.redirect(new URL("/", request.url));
+    if (publicRoutes.includes(pathname)) {
+        return NextResponse.redirect(new URL(allowedDashboard, request.url));
     }
 
-    // 🛡️ Provider routes
-    if (pathname.startsWith("/provider-dashboard") && role !== Roles.provider) {
-        return NextResponse.redirect(new URL("/", request.url));
+    if (pathname.startsWith("/admin-dashboard") && userRole !== Roles.ADMIN) {
+        return NextResponse.redirect(new URL(allowedDashboard, request.url));
     }
 
-    // 🛡️ Customer routes
-    if (pathname.startsWith("/customer-dashboard") && role !== Roles.customer) {
-        return NextResponse.redirect(new URL("/", request.url));
+    if (pathname.startsWith("/dashboard") && userRole !== Roles.CUSTOMER) {
+        return NextResponse.redirect(new URL(allowedDashboard, request.url));
+    }
+
+    if (
+        pathname.startsWith("/provider-dashboard") &&
+        userRole !== Roles.PROVIDER
+    ) {
+        return NextResponse.redirect(new URL(allowedDashboard, request.url));
     }
 
     return NextResponse.next();
@@ -34,8 +50,13 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
     matcher: [
-        "/dashboard/customer/:path*",
-        "/dashboard/admin/:path*",
-        "/dashboard/provider/:path*",
+        "/dashboard/:path*",
+        "/admin-dashboard/:path*",
+        "/provider-dashboard/:path*",
+        "/login",
+        "/register",
+        "/forgot-password",
+        "/become-provider",
+        "/orders/:path*",
     ],
 };

@@ -32,19 +32,22 @@ import {
     ChefHat,
     ShieldCheck
 } from "lucide-react";
-import { authClient } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 import { ModeToggle } from "./ModeToggle";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+// import { userService } from "@/services/user.service";
 
 const navLinks = [
     { label: "Browse Meals", href: "/meals" },
 ];
 
-export default function Navbar() {
+export default async function Navbar() {
     const pathname = usePathname();
-    const { data: session, isPending } = authClient.useSession();
+    const { data, isPending } = useSession()
     const [isOpen, setIsOpen] = useState(false);
+
+    const role = (data?.user as any).role;
 
     return (
         <motion.header
@@ -77,8 +80,8 @@ export default function Navbar() {
                     <ModeToggle />
 
                     <div className="hidden sm:flex items-center gap-2">
-                        {isPending ? null : session?.user ? (
-                            <UserMenu user={session.user} />
+                        {isPending ? null : data?.user ? (
+                            <UserMenu user={data.user} />
                         ) : (
                             <div className="flex items-center gap-2">
                                 <Button variant="ghost" asChild className="font-medium">
@@ -93,7 +96,7 @@ export default function Navbar() {
 
                     {/* Mobile Menu Trigger */}
                     <div className="md:hidden flex items-center gap-2">
-                        {!session?.user && !isPending && (
+                        {!data?.user && !isPending && (
                             <Button size="sm" asChild className="bg-[#D97757] text-xs h-8 px-3 rounded-full">
                                 <Link href="/login">Join</Link>
                             </Button>
@@ -109,15 +112,15 @@ export default function Navbar() {
                                     <SheetTitle className="font-serif text-2xl">MealMate</SheetTitle>
                                 </SheetHeader>
                                 <div className="flex flex-col gap-4">
-                                    {session?.user && (
+                                    {data?.user && (
                                         <div className="flex items-center gap-3 p-3 bg-muted rounded-xl mb-4">
                                             <Avatar>
-                                                <AvatarImage src={session.user.image} />
-                                                <AvatarFallback>{session.user.name.charAt(0)}</AvatarFallback>
+                                                {/* <AvatarImage src={data?.user.image} /> */}
+                                                <AvatarFallback>{data.user.name.charAt(0)}</AvatarFallback>
                                             </Avatar>
                                             <div className="flex flex-col">
-                                                <span className="text-sm font-bold truncate">{session.user.name}</span>
-                                                <span className="text-xs text-muted-foreground uppercase font-bold tracking-tighter">{session.user.role}</span>
+                                                <span className="text-sm font-bold truncate">{data.user.name}</span>
+                                                <span className="text-xs text-muted-foreground uppercase font-bold tracking-tighter">{role}</span>
                                             </div>
                                         </div>
                                     )}
@@ -135,8 +138,8 @@ export default function Navbar() {
                                         </Link>
                                     ))}
                                     <div className="border-t pt-4 mt-4 space-y-4">
-                                        {session?.user ? (
-                                            <MobileAuthLinks role={session.user.role} close={() => setIsOpen(false)} />
+                                        {data?.user ? (
+                                            <MobileAuthLinks role={role} close={() => setIsOpen(false)} />
                                         ) : (
                                             <div className="flex flex-col gap-2">
                                                 <Button variant="outline" asChild onClick={() => setIsOpen(false)}>

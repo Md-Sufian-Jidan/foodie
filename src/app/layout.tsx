@@ -62,8 +62,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body
+        suppressHydrationWarning
         className={`${merriweather.variable} antialiased`}
         style={{
           fontFamily:

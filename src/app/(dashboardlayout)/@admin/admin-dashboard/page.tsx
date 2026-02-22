@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import StatCard from "@/components/modules/customer/customer-dashboard/StatCard";
-import { adminService } from "@/services/admin.service";
 import {
     Users,
     ShoppingBag,
@@ -15,6 +14,7 @@ import {
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { adminService } from "@/services/admin.service";
 
 export default function AdminDashboardPage() {
     const [stats, setStats] = useState({
@@ -23,17 +23,22 @@ export default function AdminDashboardPage() {
         totalProviders: 0,
     });
 
-    useEffect(() => {
-        async function fetchStats() {
-            // Mocking for visual consistency, replace with your actual service call
-            const data = {
-                totalUsers: 1240,
-                totalOrders: 856,
-                totalProviders: 42,
-            };
-            setStats(data);
+    const getAdminStats = async () => {
+
+        const { data, error } = await adminService.getAdminStats();
+        if (error) {
+            // console.log("Error fetching stats:", error);
+            return;
         }
-        fetchStats();
+        setStats(data.data || {
+            totalUsers: 0,
+            totalOrders: 0,
+            totalProviders: 0,
+        });
+    };
+
+    useEffect(() => {
+        getAdminStats();
     }, []);
 
     return (

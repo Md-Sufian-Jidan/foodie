@@ -31,6 +31,7 @@ import {
   Settings,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { authClient } from "@/lib/auth-client";
 
 type Role = "ADMIN" | "CUSTOMER" | "PROVIDER";
 
@@ -139,8 +140,8 @@ export function AppSidebar({ role }: { role: Role }) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
-              className="w-full justify-start gap-3 text-[#6B7280] hover:text-red-500 transition-colors"
-              onClick={() => {/* Add Signout Logic */ }}
+              className="w-full justify-start gap-3 text-[#6B7280] hover:text-red-500 transition-colors hover:cursor-pointer"
+              onClick={() => authClient.signOut()}
             >
               <LogOut size={20} />
               {state !== "collapsed" && <span className="text-sm font-medium">Log Out</span>}

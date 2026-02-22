@@ -21,6 +21,7 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Roles } from "@/constants/role";
 
 export default function DashboardLayout({
     admin,
@@ -35,7 +36,6 @@ export default function DashboardLayout({
     const router = useRouter();
     const pathname = usePathname();
 
-    // Loading State
     if (isPending) {
         return (
             <div className="flex h-screen w-full items-center justify-center bg-[#FAF9F7]">
@@ -44,15 +44,13 @@ export default function DashboardLayout({
         );
     }
 
-    // Auth Guard
     if (!data) {
         router.replace("/login");
         return null;
     }
+    const role = (data.user as any).role;
 
-    const role = data.user.role;
 
-    // Helper to format breadcrumb from pathname
     const pathSegments = pathname.split("/").filter(Boolean);
 
     return (
@@ -114,9 +112,9 @@ export default function DashboardLayout({
                         className="flex flex-1 flex-col p-4 md:p-8 md:pt-6"
                     >
                         <div className="max-w-7xl mx-auto w-full space-y-6">
-                            {role === "ADMIN" && admin}
-                            {role === "CUSTOMER" && customer}
-                            {role === "PROVIDER" && provider}
+                            {role === Roles.admin && admin}
+                            {role === Roles.customer && customer}
+                            {role === Roles.provider && provider}
                         </div>
                     </motion.main>
                 </SidebarInset>

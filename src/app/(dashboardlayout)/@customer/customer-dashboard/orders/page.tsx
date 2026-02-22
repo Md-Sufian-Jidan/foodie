@@ -5,27 +5,51 @@ import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Search, Filter } from "lucide-react";
 
-const orders = [
+type OrderStatus = "PLACED" | "PREPARING" | "DELIVERED" | "CANCELLED";
+
+type Order = {
+    id: string;
+    total: number;
+    status: OrderStatus;
+    itemsCount: number;
+    createdAt: string;
+};
+
+const orders: Order[] = [
     {
-        id: "MM-1023",
+        id: "MM-1001",
         total: 450,
         status: "DELIVERED",
         itemsCount: 3,
         createdAt: "12 Sep 2024",
     },
     {
-        id: "MM-1024",
+        id: "MM-1002",
         total: 320,
         status: "PREPARING",
         itemsCount: 2,
         createdAt: "14 Sep 2024",
     },
     {
-        id: "MM-1025",
+        id: "MM-1003",
         total: 890,
-        status: "PENDING",
+        status: "PLACED",
         itemsCount: 5,
         createdAt: "15 Sep 2024",
+    },
+    {
+        id: "MM-1004",
+        total: 210,
+        status: "CANCELLED",
+        itemsCount: 1,
+        createdAt: "16 Sep 2024",
+    },
+    {
+        id: "MM-1005",
+        total: 670,
+        status: "DELIVERED",
+        itemsCount: 4,
+        createdAt: "18 Sep 2024",
     },
 ];
 

@@ -43,7 +43,7 @@ export default function ProviderOrdersPage() {
     const [orderList, setOrderList] = useState(initialOrders);
 
     if (isPending) return <div className="p-10 text-center font-jakarta animate-pulse">Syncing with kitchen...</div>;
-    if (!session || session.user.role !== "PROVIDER") redirect("/login");
+    // if (!session || session.user.role !== "PROVIDER") redirect("/login");
 
     const updateStatus = (id: string, newStatus: string) => {
         // Here you would also call your API

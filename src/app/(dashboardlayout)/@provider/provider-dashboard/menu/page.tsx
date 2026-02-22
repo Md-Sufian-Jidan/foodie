@@ -2,13 +2,12 @@
 
 import { useState } from "react";
 import { useSession } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Edit3, Trash2, Plus, CheckCircle2, Clock, ChefHat } from "lucide-react";
+import { Edit3, Trash2, Plus, CheckCircle2, ChefHat } from "lucide-react";
 import Link from "next/link";
 
 // --- Types ---
@@ -39,9 +38,6 @@ export default function ProviderManagementPage() {
 
     if (isPending) return <div className="flex justify-center p-20 animate-pulse text-[#D97757]">Loading Kitchen...</div>;
 
-    console.log(req.);
-    if (!data || data.user?.role !== "PROVIDER") redirect("/login");
-
     return (
         <div className="space-y-8 p-4 lg:p-8 bg-[#FAF9F7] dark:bg-[#121110] min-h-screen rounded-4xl">
 
@@ -51,7 +47,7 @@ export default function ProviderManagementPage() {
                     <h1 className="font-serif text-4xl font-bold text-[#1F2933] dark:text-[#F5F4F2]">
                         Kitchen Command
                     </h1>
-                    <p className="text-[#6B7280] font-jakarta">Welcome back, Chef {data.user.name.split(' ')[0]}</p>
+                    <p className="text-[#6B7280] font-jakarta">Welcome back, Chef {data ? data.user.name.split(' ')[0] : null}</p>
                 </div>
                 <Link href='/provider-dashboard/create-meal'>
                     <Button className="bg-[#D97757] hover:bg-[#D97757]/90 text-white rounded-full shadow-lg h-12 px-6 hover:cursor-pointer">

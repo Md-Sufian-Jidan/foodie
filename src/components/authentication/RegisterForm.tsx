@@ -62,7 +62,6 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                 }
 
                 toast.success("Registered Successfully!", { id: toastId });
-                console.log(data);
                 setTimeout(() => {
                     router.push("/login");
                 }, 1200);

@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useSession } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
 import StatCard from "@/components/modules/customer/customer-dashboard/StatCard";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { PlusCircle, Utensils, TrendingUp, Clock } from "lucide-react";
 import OrdersChart from "@/components/modules/customer/customer-dashboard/OrdersChat";
 import Link from "next/link";
+import { providerService } from "@/services/provider.service";
 
 export default function ProviderDashboard() {
     const { data, isPending } = useSession();
@@ -19,15 +19,22 @@ export default function ProviderDashboard() {
         totalRevenue: 0,
     });
 
+    const getProviderStats = async () => {
+
+        const { data, error } = await providerService.getProviderStats();
+        if (error) {
+            console.log("Error fetching stats:", error);
+            return;
+        }
+        setStats(data.data || {
+            totalUsers: 0,
+            totalOrders: 0,
+            totalProviders: 0,
+        });
+    };
+
     useEffect(() => {
-        // Simulate business data fetching
-        const businessData = {
-            totalOrders: 154,
-            pendingOrders: 8,
-            completedOrders: 146,
-            totalRevenue: 45200,
-        };
-        setStats(businessData);
+        getProviderStats();
     }, []);
 
     if (isPending) return (
@@ -35,8 +42,6 @@ export default function ProviderDashboard() {
             <div className="w-8 h-8 border-4 border-[#D97757] border-t-transparent rounded-full animate-spin" />
         </div>
     );
-
-    if (!data || data.user.role !== "PROVIDER") redirect("/login");
 
     return (
         <div className="max-w-7xl mx-auto space-y-10 p-4 lg:p-8 bg-[#FAF9F7] dark:bg-[#121110] min-h-screen rounded-4xl">
@@ -48,7 +53,7 @@ export default function ProviderDashboard() {
                         Business Overview
                     </div>
                     <h1 className="font-serif text-4xl font-bold text-[#1F2933] dark:text-[#F5F4F2]">
-                        Kitchen Command, {data.user.name.split(' ')[0]}
+                        Kitchen Command, {data?.user.name.split(' ')[0]}
                     </h1>
                 </div>
 
