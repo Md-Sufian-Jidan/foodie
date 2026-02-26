@@ -1,13 +1,13 @@
-import { Roles } from "@/constants/role";
+import { ROLES } from "@/constants/role";
 import { publicRoutes } from "@/routes/PublicRoutes";
 import { userService } from "@/services/user.service";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 const roleDashboardMap: Record<string, string> = {
-    [Roles.ADMIN]: "/admin-dashboard",
-    [Roles.CUSTOMER]: "/dashboard",
-    [Roles.PROVIDER]: "/provider-dashboard",
+    [ROLES.ADMIN]: "/admin-dashboard",
+    [ROLES.CUSTOMER]: "/dashboard",
+    [ROLES.PROVIDER]: "/provider-dashboard",
 };
 export async function proxy(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
@@ -30,17 +30,17 @@ export async function proxy(request: NextRequest) {
         return NextResponse.redirect(new URL(allowedDashboard, request.url));
     }
 
-    if (pathname.startsWith("/admin-dashboard") && userRole !== Roles.ADMIN) {
+    if (pathname.startsWith("/admin-dashboard") && userRole !== ROLES.ADMIN) {
         return NextResponse.redirect(new URL(allowedDashboard, request.url));
     }
 
-    if (pathname.startsWith("/dashboard") && userRole !== Roles.CUSTOMER) {
+    if (pathname.startsWith("/dashboard") && userRole !== ROLES.CUSTOMER) {
         return NextResponse.redirect(new URL(allowedDashboard, request.url));
     }
 
     if (
         pathname.startsWith("/provider-dashboard") &&
-        userRole !== Roles.PROVIDER
+        userRole !== ROLES.PROVIDER
     ) {
         return NextResponse.redirect(new URL(allowedDashboard, request.url));
     }

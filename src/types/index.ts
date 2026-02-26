@@ -1,4 +1,5 @@
-import { Roles, UserStatus } from "@/constants/role";
+import { Route } from "./route.type";
+export type { Route };
 
 export interface User {
     id: string;
@@ -6,8 +7,8 @@ export interface User {
     email: string;
     emailVerified: boolean;
     image?: string | null;
-    role: Roles;
-    status: UserStatus;
+    role: "admin" | "customer" | "provider";
+    status: "active" | "inactive";
     phone?: string | null;
     createdAt: Date;
     updatedAt: Date;
