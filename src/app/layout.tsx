@@ -65,7 +65,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${merriweather.variable} antialiased`}
+        className={`${merriweather.variable} antialiased container mx-auto`}
         style={{
           fontFamily:
             'var(--font-body), Merriweather, Georgia, "Times New Roman", serif',

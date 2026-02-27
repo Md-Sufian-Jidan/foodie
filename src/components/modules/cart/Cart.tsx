@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { useCartStore } from "@/store/useCartStore";
+import { useCartStore } from "@/store/userCartStore";
 import {
     ArrowLeft,
     Minus,

@@ -1,23 +1,51 @@
-import Navbar from "@/components/layout/Navbar";
-import Categories from "@/components/modules/home/Categories";
-import FeaturedMeals from "@/components/modules/home/FeaturedMeals";
-import Footer from "@/components/modules/home/Footer";
+import { categoryActions } from "@/actions/categories";
+import { getPopularMeals } from "@/actions/reviews";
+import { CategorySlider } from "@/components/modules/home/CategorySlider";
 import Hero from "@/components/modules/home/Hero";
 import HowItWorks from "@/components/modules/home/HowItWorks";
-import ProviderCTA from "@/components/modules/home/ProviderCTA";
+import { OrderTracking } from "@/components/modules/home/OrderTracking";
+import { PopularMeals } from "@/components/modules/home/PopularMeals";
+import { CategorySliderSkeleton, PopularMealsSkeleton } from "@/helper/Skeleton";
+import { Suspense } from "react";
+export const dynamic = "auto";
+export const revalidate = 0;
 
-const CommonLayout = () => {
+async function getHomeData() {
+    try {
+        const [categoriesData, popularMealsData] = await Promise.all([
+            categoryActions(),
+            getPopularMeals(),
+        ]);
+        return {
+            categories: categoriesData?.data?.data || [],
+            meals: popularMealsData?.data?.data || [],
+            error: null,
+        };
+    } catch (error) {
+        console.error("Error fetching home data:", error);
+        return {
+            categories: [],
+            meals: [],
+            error: "Failed to load data",
+        };
+    }
+}
+
+export default async function Home() {
+    const { categories, meals, error } = await getHomeData();
+
     return (
-        <div>
-            <Navbar />
+        <>
             <Hero />
-            <Categories />
-            <FeaturedMeals />
+            <Suspense fallback={<CategorySliderSkeleton />}>
+                <CategorySlider categories={categories} />
+            </Suspense>
+            <Suspense fallback={<PopularMealsSkeleton />}>
+                <PopularMeals meals={meals?.data} />
+            </Suspense>
             <HowItWorks />
-            <ProviderCTA />
-            <Footer />
-        </div>
+            <OrderTracking />
+        </>
     );
-};
-
-export default CommonLayout;
+}
+// export const revalidate = 300;
