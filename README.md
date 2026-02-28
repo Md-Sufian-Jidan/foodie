@@ -30,12 +30,12 @@
 > Watch MealMate in action — from browsing meals to real-time order tracking.
 
 <!-- Replace the URL below with your actual video link after uploading -->
-[![MealMate Demo Video](https://img.shields.io/badge/▶%20Watch%20Demo-YouTube-red?style=for-the-badge&logo=youtube)](https://youtube.com)
+[![MealMate Demo Video](https://drive.google.com/drive/folders/1BFsTe_Faip6CwDFOBLNyxfHM_T7Fbntd?usp=sharing)](https://drive.google.com/drive/folders/1BFsTe_Faip6CwDFOBLNyxfHM_T7Fbntd?usp=sharing)
 
-> 📌 *Add your video link above once uploaded. You can also embed it using the syntax below:*
+<!-- > 📌 *Add your video link above once uploaded. You can also embed it using the syntax below:*
 > ```md
 > [![Demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
-> ```
+> ``` -->
 
 ---
 
