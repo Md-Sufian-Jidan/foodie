@@ -28,8 +28,8 @@ import {
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
-import { OrderDetailsModal } from "./OrderDetailsModal";
-import { ReviewDialog } from "./ReviewDialog";
+import { OrderDetailsModal } from "../customer/OrderDetailsModal";
+import { ReviewDialog } from "../customer/ReviewDialog";
 
 interface OrderItem {
     id: string;

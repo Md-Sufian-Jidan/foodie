@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-const AUTH_URL = process.env.NEXT_PUBLIC_API_URL as string;
+const AUTH_URL = process.env.NEXT_PUBLIC_AUTH_URL as string;
 const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
 export const userService = {
@@ -31,7 +31,7 @@ export const userService = {
     getCurrentUser: async function () {
         try {
             const cookieStore = await cookies();
-            const res = await fetch(`${API_URL}/api/users/me`, {
+            const res = await fetch(`${API_URL}/users/me`, {
                 headers: {
                     Cookie: cookieStore.toString(),
                 },

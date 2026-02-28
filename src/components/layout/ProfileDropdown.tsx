@@ -16,21 +16,21 @@ export function ProfileDropdown({ user }: { user: any }) {
     const role: Roles = user?.role;
 
     const roleBasedLinks = {
-        admin: [
+        ADMIN: [
             {
                 href: "/admin-dashboard",
                 label: "Admin Dashboard",
                 icon: LayoutDashboardIcon,
             },
         ],
-        provider: [
+        PROVIDER: [
             {
                 href: "/provider-dashboard",
                 label: "Provider Dashboard",
                 icon: LayoutDashboardIcon,
             },
         ],
-        customer: [
+        CUSTOMER: [
             { href: "/dashboard", label: "Dashboard", icon: LayoutDashboardIcon },
             { href: "/dashboard/orders", label: "My Orders", icon: ShoppingBagIcon },
         ],
@@ -38,7 +38,7 @@ export function ProfileDropdown({ user }: { user: any }) {
 
     const links =
         roleBasedLinks[role as keyof typeof roleBasedLinks] ||
-        roleBasedLinks.customer;
+        roleBasedLinks.CUSTOMER;
 
     return (
         <DropdownMenu modal={false}>

@@ -44,13 +44,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "MealMate — Discover & Order Delicious Meals",
-    description:
-      "Order meals from local providers and enjoy fast, reliable delivery.",
-    images: ["/og-image.png"],
-  },
+  // twitter: {
+  //   card: "summary_large_image",
+  //   title: "MealMate — Discover & Order Delicious Meals",
+  //   description:
+  //     "Order meals from local providers and enjoy fast, reliable delivery.",
+  //   images: ["/og-image.png"],
+  // },
   icons: {
     icon: "/favicon.ico",
   },
@@ -65,7 +65,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${merriweather.variable} antialiased container mx-auto`}
+        className={`${merriweather.variable} antialiased`}
         style={{
           fontFamily:
             'var(--font-body), Merriweather, Georgia, "Times New Roman", serif',

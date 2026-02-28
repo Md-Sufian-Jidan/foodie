@@ -8,7 +8,7 @@ import {
     CardFooter,
     CardHeader,
 } from "@/components/ui/card";
-import { useCartStore } from "@/store/useCartStore";
+import { useCartStore } from "@/store/userCartStore";
 import { MealCardProps } from "@/types/meal.type";
 import { Clock, Eye, Flame, ShoppingCart, Utensils } from "lucide-react";
 import Link from "next/link";

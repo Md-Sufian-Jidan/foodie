@@ -6,8 +6,8 @@ import { Loader, Search, Utensils } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState, useTransition } from "react";
 import { MealCard } from "./MealCard";
-import { FilterValues, MealFilters } from "./MealFilters";
 import PaginationControls from "./Pagination";
+import { FilterValues, MealFilters } from "./MealsFilter";
 
 export function MealsClient({
     initialMeals,

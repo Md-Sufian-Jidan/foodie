@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
 import {
     ArrowRight,
     CheckCircle2,
@@ -10,10 +11,13 @@ import {
     Loader2,
     Mail,
     XCircle,
+    RefreshCw,
+    UtensilsCrossed,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 
 export function VerifyEmailContent() {
@@ -42,7 +46,6 @@ export function VerifyEmailContent() {
             } else {
                 setStatus("success");
                 toast.success("Email verified successfully!");
-                // Optional: auto-redirect after delay
                 setTimeout(() => {
                     router.push("/login");
                 }, 5000);
@@ -53,147 +56,112 @@ export function VerifyEmailContent() {
     }, [token, router]);
 
     return (
-        <div className="min-h-screen flex items-center justify-center p-4 bg-linear-to-br from-background via-background to-primary/5">
-            <div className="max-w-md w-full space-y-8">
-                {/* Logo */}
-                <div className="text-center">
-                    <Link href="/" className="inline-flex items-center gap-2">
-                        <div className="w-12 h-12 rounded-xl bg-red-600 flex items-center justify-center">
-                            <span className="text-white font-bold text-2xl">F</span>
+        <div className="min-h-screen flex items-center justify-center p-6 bg-[#FAF9F7]">
+            <div className="max-w-md w-full">
+                {/* Branding */}
+                <div className="text-center mb-10">
+                    <Link href="/" className="inline-flex flex-col items-center gap-3 group">
+                        <div className="w-14 h-14 rounded-2xl bg-[#D97757] flex items-center justify-center shadow-lg transition-transform group-hover:scale-105">
+                            <div className="bg-[#D97757] p-2 rounded-lg group-hover:rotate-12 transition-transform shadow-lg shadow-[#D97757]/20">
+                                <UtensilsCrossed size={18} className="text-white" />
+                            </div>
                         </div>
-                        <span className="text-2xl font-bold text-foreground">FoodHub</span>
+                        <span className="text-2xl font-serif font-bold text-[#1F2933]">MealMate</span>
                     </Link>
                 </div>
 
-                {/* Status Card */}
-                <Card className="border-2">
-                    <CardContent className="pt-6">
-                        {status === "loading" && (
-                            <div className="flex flex-col items-center text-center space-y-6 py-8">
-                                <div className="relative">
-                                    <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
-                                        <Loader2 className="w-10 h-10 text-primary animate-spin" />
-                                    </div>
-                                    <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-                                        <Mail className="w-4 h-4 text-primary" />
-                                    </div>
-                                </div>
-                                <div className="space-y-3">
-                                    <h1 className="text-3xl font-bold text-foreground">
-                                        Verifying Your Email
-                                    </h1>
-                                    <p className="text-muted-foreground text-sm max-w-sm">
-                                        Please wait while we verify your email address. This should
-                                        only take a moment.
-                                    </p>
-                                </div>
-                                <div className="flex gap-2 items-center">
-                                    <div className="w-2 h-2 rounded-full bg-primary animate-bounce [animation-delay:-0.3s]"></div>
-                                    <div className="w-2 h-2 rounded-full bg-primary animate-bounce [animation-delay:-0.15s]"></div>
-                                    <div className="w-2 h-2 rounded-full bg-primary animate-bounce"></div>
-                                </div>
-                            </div>
-                        )}
-
-                        {status === "success" && (
-                            <div className="flex flex-col items-center text-center space-y-6 py-8">
-                                <div className="relative">
-                                    <div className="w-20 h-20 rounded-full bg-green-500/10 flex items-center justify-center border-2 border-green-500/20">
-                                        <CheckCircle2 className="w-10 h-10 text-green-600" />
-                                    </div>
-                                    <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center animate-bounce">
-                                        <CheckCircle2 className="w-4 h-4 text-white" />
-                                    </div>
-                                </div>
-                                <div className="space-y-3">
-                                    <h1 className="text-3xl font-bold text-foreground">
-                                        Email Verified!
-                                    </h1>
-                                    <p className="text-muted-foreground text-sm max-w-sm">
-                                        Your account has been successfully verified. You can now
-                                        access all features of FoodHub.
-                                    </p>
-                                </div>
-                                <div className="w-full bg-green-500/5 border border-green-500/20 rounded-lg p-4">
-                                    <p className="text-sm text-green-700 dark:text-green-400 font-medium">
-                                        ✓ Account activated successfully
-                                        <br />✓ You'll be redirected to login in 5 seconds
-                                    </p>
-                                </div>
-                                <Button asChild className="w-full" size="lg">
-                                    <Link href="/login">
-                                        Sign In Now <ArrowRight className="ml-2 w-4 h-4" />
-                                    </Link>
-                                </Button>
-                            </div>
-                        )}
-
-                        {status === "error" && (
-                            <div className="flex flex-col items-center text-center space-y-6 py-8">
-                                <div className="relative">
-                                    <div className="w-20 h-20 rounded-full bg-destructive/10 flex items-center justify-center border-2 border-destructive/20">
-                                        <XCircle className="w-10 h-10 text-destructive" />
-                                    </div>
-                                    <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-destructive flex items-center justify-center">
-                                        <XCircle className="w-4 h-4 text-white" />
-                                    </div>
-                                </div>
-                                <div className="space-y-3">
-                                    <h1 className="text-3xl font-bold text-foreground">
-                                        Verification Failed
-                                    </h1>
-                                    <p className="text-muted-foreground text-sm max-w-sm">
-                                        We couldn't verify your email address. The link may be
-                                        expired or invalid.
-                                    </p>
-                                </div>
-                                <div className="w-full bg-destructive/5 border border-destructive/20 rounded-lg p-4">
-                                    <div className="flex items-start gap-3">
-                                        <XCircle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
-                                        <div className="flex-1 text-left">
-                                            <p className="text-sm font-medium text-destructive mb-1">
-                                                Error Details
-                                            </p>
-                                            <p className="text-xs text-destructive/80">
-                                                {error || "The verification link is no longer valid."}
-                                            </p>
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={status}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.4 }}
+                    >
+                        <Card className="border-none shadow-[0_20px_50px_rgba(217,119,87,0.1)] bg-white rounded-[2.5rem] overflow-hidden">
+                            <CardContent className="pt-12 pb-10 px-8">
+                                {status === "loading" && (
+                                    <div className="flex flex-col items-center text-center space-y-6">
+                                        <div className="relative">
+                                            <div className="w-24 h-24 rounded-full bg-[#FAF9F7] flex items-center justify-center border-2 border-[#D97757]/10">
+                                                <Loader2 className="w-10 h-10 text-[#D97757] animate-spin" />
+                                            </div>
+                                            <motion.div
+                                                animate={{ scale: [1, 1.2, 1] }}
+                                                transition={{ repeat: Infinity, duration: 2 }}
+                                                className="absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center"
+                                            >
+                                                <Mail className="w-5 h-5 text-[#D97757]" />
+                                            </motion.div>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <h1 className="text-2xl font-serif font-bold text-[#1F2933]">Verifying Email</h1>
+                                            <p className="text-[#6B7280] text-sm">Fine-tuning your kitchen access...</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="w-full space-y-3">
-                                    <Button asChild className="w-full" size="lg">
-                                        <Link href="/register">
-                                            <Mail className="mr-2 w-4 h-4" />
-                                            Request New Verification Link
-                                        </Link>
-                                    </Button>
-                                    <Button
-                                        variant="outline"
-                                        asChild
-                                        className="w-full"
-                                        size="lg"
-                                    >
-                                        <Link href="/">
-                                            <Home className="mr-2 w-4 h-4" />
-                                            Back to Home
-                                        </Link>
-                                    </Button>
-                                </div>
-                            </div>
-                        )}
-                    </CardContent>
-                </Card>
+                                )}
 
-                {/* Footer Info */}
-                <p className="text-center text-xs text-muted-foreground">
-                    Need help? Contact us at{" "}
-                    <a
-                        href="mailto:support@foodhub.com"
-                        className="text-primary hover:underline"
-                    >
-                        support@foodie.com
-                    </a>
-                </p>
+                                {status === "success" && (
+                                    <div className="flex flex-col items-center text-center space-y-8">
+                                        <div className="w-24 h-24 rounded-full bg-[#D97757]/5 flex items-center justify-center border-2 border-[#D97757]/20">
+                                            <motion.div
+                                                initial={{ scale: 0 }}
+                                                animate={{ scale: 1 }}
+                                                transition={{ type: "spring", damping: 12 }}
+                                            >
+                                                <CheckCircle2 className="w-12 h-12 text-[#D97757]" />
+                                            </motion.div>
+                                        </div>
+                                        <div className="space-y-3">
+                                            <h1 className="text-3xl font-serif font-bold text-[#1F2933]">Success!</h1>
+                                            <p className="text-[#6B7280] text-sm leading-relaxed">
+                                                Your email is verified. Welcome to the **MealMate** family. We are redirecting you to your dashboard.
+                                            </p>
+                                        </div>
+                                        <Button asChild className="w-full h-12 bg-[#D97757] hover:bg-[#D97757]/90 rounded-xl" size="lg">
+                                            <Link href="/login">
+                                                Go to Login <ArrowRight className="ml-2 w-4 h-4" />
+                                            </Link>
+                                        </Button>
+                                    </div>
+                                )}
+
+                                {status === "error" && (
+                                    <div className="flex flex-col items-center text-center space-y-8">
+                                        <div className="w-24 h-24 rounded-full bg-red-50 flex items-center justify-center border-2 border-red-100">
+                                            <XCircle className="w-12 h-12 text-red-500" />
+                                        </div>
+                                        <div className="space-y-3">
+                                            <h1 className="text-3xl font-serif font-bold text-[#1F2933]">Verification Failed</h1>
+                                            <p className="text-[#6B7280] text-sm leading-relaxed">
+                                                {error || "The link may have expired or is no longer valid."}
+                                            </p>
+                                        </div>
+                                        <div className="w-full space-y-3 pt-4">
+                                            <Button asChild className="w-full h-12 bg-[#D97757] hover:bg-[#D97757]/90 rounded-xl">
+                                                <Link href="/register">
+                                                    <RefreshCw className="mr-2 w-4 h-4" /> Try Registering Again
+                                                </Link>
+                                            </Button>
+                                            <Button variant="ghost" asChild className="w-full text-[#6B7280] hover:text-[#1F2933]">
+                                                <Link href="/">
+                                                    <Home className="mr-2 w-4 h-4" /> Back to Home
+                                                </Link>
+                                            </Button>
+                                        </div>
+                                    </div>
+                                )}
+                            </CardContent>
+                        </Card>
+                    </motion.div>
+                </AnimatePresence>
+
+                {/* Help Footer */}
+                <div className="mt-12 text-center">
+                    <p className="text-[#6B7280] text-sm font-sans">
+                        Confused? <a href="mailto:support@mealmate.com" className="text-[#D97757] font-bold hover:underline">Contact Support</a>
+                    </p>
+                </div>
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useCartStore } from "@/store/useCartStore";
+import { useCartStore } from "@/store/userCartStore";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";

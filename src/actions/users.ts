@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL as string;
+console.log(BACKEND_URL);
 
 export const getAllUsers = async () => {
     try {
