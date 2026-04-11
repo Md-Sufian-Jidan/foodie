@@ -5,6 +5,8 @@ export default async function AddMealsPage() {
     // Fetch categories for the form
     const { data: categoriesData } = await categoryService.getCategories();
     const categories = categoriesData?.data || [];
+    console.log("Categories Data", categoriesData);
+    console.log(categories);
 
     return (
         <div className="container mx-auto py-8 px-4">

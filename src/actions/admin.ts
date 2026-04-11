@@ -7,7 +7,7 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL as string;
 export const getAllUsers = async () => {
     try {
         const cookieStore = await cookies();
-        const response = await fetch(`${BACKEND_URL}/api/users`, {
+        const response = await fetch(`${BACKEND_URL}/users`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
 
 const steps = [
     {
@@ -19,53 +19,76 @@ const steps = [
         description: "Get your food delivered fresh to your doorstep.",
         icon: "🏠",
     },
-]
+];
 
 export default function HowItWorks() {
     return (
-        <section className="bg-white py-16">
-            <div className="mx-auto max-w-7xl px-4">
+        <section className="relative py-20 bg-gradient-to-b from-[#FAF9F7] to-white dark:from-gray-950 dark:to-gray-900">
+
+            {/* Background Glow */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-[#D97757]/10 blur-3xl rounded-full" />
+                <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-orange-200/10 blur-3xl rounded-full" />
+            </div>
+
+            <div className="relative mx-auto max-w-7xl px-4">
+
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.4 }}
-                    className="mb-10"
+                    transition={{ duration: 0.5 }}
+                    className="text-center mb-14"
                 >
-                    <h2 className="font-heading text-3xl font-bold text-[#1F2933]">
+                    <h2 className="text-3xl md:text-4xl font-bold font-serif text-gray-800 dark:text-white">
                         How MealMate Works
                     </h2>
-                    <p className="mt-2 font-body text-[#6B7280]">
+
+                    <p className="mt-3 text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
                         Ordering your favorite meals is simple and fast. Follow these steps to get started.
                     </p>
                 </motion.div>
 
                 {/* Steps Grid */}
                 <div className="grid gap-6 sm:grid-cols-3">
+
                     {steps.map((step, index) => (
                         <motion.div
                             key={index}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1, duration: 0.4 }}
+                            transition={{ delay: index * 0.1, duration: 0.5 }}
                         >
-                            <Card className="border border-[#E5E7EB] py-6 px-4 text-center">
-                                <CardContent>
-                                    <div className="text-4xl text-[#D97757]">{step.icon}</div>
-                                    <h3 className="mt-4 font-heading text-lg text-[#1F2933]">
+
+                            <Card className="h-full flex flex-col group overflow-hidden rounded-2xl border border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/60 dark:bg-white/10 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center">
+
+                                <CardContent className="p-8 flex flex-col flex-1">
+
+                                    {/* Icon */}
+                                    <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        {step.icon}
+                                    </div>
+
+                                    {/* Title */}
+                                    <h3 className="text-lg font-bold text-gray-800 dark:text-white group-hover:text-[#D97757] transition-colors">
                                         {step.title}
                                     </h3>
-                                    <p className="mt-2 font-body text-sm text-[#6B7280]">
+
+                                    {/* Description */}
+                                    <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 flex-1">
                                         {step.description}
                                     </p>
+
                                 </CardContent>
                             </Card>
+
                         </motion.div>
                     ))}
+
                 </div>
             </div>
         </section>
-    )
+    );
 }

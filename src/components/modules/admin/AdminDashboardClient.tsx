@@ -67,11 +67,11 @@ export default function AdminDashboardClient({
     // Calculate statistics
     const stats = {
         totalUsers: users.length,
-        activeUsers: users.filter((u) => u.status === "active").length,
-        inactiveUsers: users.filter((u) => u.status === "inactive").length,
-        admins: users.filter((u) => u.role === "admin").length,
-        providers: users.filter((u) => u.role === "provider").length,
-        customers: users.filter((u) => u.role === "customer").length,
+        activeUsers: users.filter((u) => u.status === "ACTIVE").length,
+        inactiveUsers: users.filter((u) => u.status === "INACTIVE").length,
+        admins: users.filter((u) => u.role === "ADMIN").length,
+        providers: users.filter((u) => u.role === "PROVIDER").length,
+        customers: users.filter((u) => u.role === "CUSTOMER").length,
         totalOrders: orders.length,
         totalRevenue: orders.reduce((sum, order) => sum + order.totalAmount, 0),
         pendingOrders: orders.filter((o) => o.status === "PENDING").length,

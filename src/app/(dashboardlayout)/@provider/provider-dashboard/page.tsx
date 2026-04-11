@@ -18,6 +18,11 @@ export default async function ProviderDashboard() {
         averageRating: 0,
         ratingDistribution: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
     };
+
+    // console.log("Meals", meals);
+    // console.log("Orders", orders);
+    // console.log("Reviews data", reviewsData)
+
     // Get shop name from meals data (provider info)
     const shopName = meals[0]?.provider?.shopName || "My Shop";
 

@@ -2,84 +2,106 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 import hero from "../../../../public/hero.jpg";
 
 export default function Hero() {
     return (
-        <section className="bg-[#FAF9F7] overflow-hidden">
-            <div className="mx-auto max-w-7xl px-4 py-12 lg:py-20">
-                {/* Main Grid Container */}
-                <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+        <section className="relative overflow-hidden bg-gradient-to-b from-[#FAF9F7] to-white dark:from-gray-950 dark:to-gray-900 mt-5">
 
-                    {/* Left Side: Content */}
-                    <div className="relative z-10 order-2 lg:order-1">
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, ease: "easeOut" }}
-                            className="font-serif text-4xl font-bold leading-tight text-[#1F2933] sm:text-5xl lg:text-6xl"
-                        >
-                            Discover & Order
-                            <br />
-                            <span className="text-[#D97757]">Delicious Meals</span> Near You
-                        </motion.h1>
+            {/* Background Glow */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#D97757]/10 blur-3xl rounded-full" />
+                <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-orange-200/10 blur-3xl rounded-full" />
+            </div>
 
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1, duration: 0.5 }}
-                            className="mt-6 max-w-xl font-jakarta text-lg text-[#6B7280]"
-                        >
-                            MealMate connects you with trusted local providers. Browse menus,
-                            place orders, and enjoy fresh meals delivered straight to your door.
-                        </motion.p>
+            <div className="relative mx-auto max-w-7xl px-4 py-16 lg:py-20">
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2, duration: 0.5 }}
-                            className="mt-10 flex flex-wrap gap-4"
-                        >
-                            <Button
-                                asChild
-                                className="bg-[#D97757] px-8 py-7 text-base hover:bg-[#c96a4f] rounded-full transition-all hover:scale-105"
+                <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
+
+                    {/* LEFT CONTENT */}
+                    <div className="order-2 lg:order-1">
+
+                        {/* Glass Container */}
+                        <div className="backdrop-blur-xl bg-white/60 dark:bg-white/10 border border-white/20 shadow-xl rounded-3xl p-8 lg:p-10">
+
+                            {/* Title */}
+                            <motion.h1
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5 }}
+                                className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-gray-800 dark:text-white"
                             >
-                                <Link href="/meals">Browse Meals</Link>
-                            </Button>
+                                Discover & Order
+                                <br />
+                                <span className="text-[#D97757]">Delicious Meals</span> Near You
+                            </motion.h1>
 
-                            <Button
-                                asChild
-                                variant="outline"
-                                className="border-[#D97757] text-[#D97757] px-8 py-7 text-base hover:bg-[#D97757] hover:text-white rounded-full transition-all"
+                            {/* Subtitle */}
+                            <motion.p
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.1 }}
+                                className="mt-6 text-gray-500 dark:text-gray-300 text-lg max-w-xl"
                             >
-                                <Link href="/register">Become a Provider</Link>
-                            </Button>
-                        </motion.div>
+                                MealMate connects you with trusted local vendors. Browse meals,
+                                place orders, and enjoy fresh food delivered fast.
+                            </motion.p>
+
+                            {/* Buttons */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2 }}
+                                className="mt-8 flex flex-wrap gap-4"
+                            >
+                                <Button
+                                    asChild
+                                    className="bg-[#D97757] hover:bg-[#c96a4f] text-white px-8 py-6 rounded-full shadow-lg hover:scale-105 transition-all"
+                                >
+                                    <Link href="/meals">Browse Meals</Link>
+                                </Button>
+
+                                <Button
+                                    asChild
+                                    variant="outline"
+                                    className="border-[#D97757] text-[#D97757] hover:bg-[#D97757] hover:text-white px-8 py-6 rounded-full transition-all"
+                                >
+                                    <Link href="/register">Become a Provider</Link>
+                                </Button>
+                            </motion.div>
+
+                        </div>
                     </div>
 
-                    {/* Right Side: Image */}
+                    {/* RIGHT IMAGE */}
                     <motion.div
-                        initial={{ opacity: 0, x: 20 }}
+                        initial={{ opacity: 0, x: 30 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.3, duration: 0.6 }}
-                        className="relative order-1 lg:order-2 h-[350px] sm:h-[450px] lg:h-[550px] w-full"
+                        transition={{ delay: 0.3 }}
+                        className="order-1 lg:order-2 relative h-[350px] sm:h-[450px] lg:h-[550px]"
                     >
-                        <div className="relative h-full w-full overflow-hidden rounded-3xl shadow-2xl">
+                        <div className="relative h-full w-full rounded-3xl overflow-hidden border border-white/20 backdrop-blur-xl shadow-2xl">
+
                             <Image
                                 src={hero}
+                                alt="Delicious food"
                                 fill
-                                alt="Delicious home cooked meal"
-                                className="object-cover"
+                                className="object-cover hover:scale-105 transition-transform duration-700"
                                 priority
-                                sizes="(max-width: 1024px) 100vw, 50vw"
                             />
+
+                            {/* Glass overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                         </div>
 
-                        {/* Subtle decorative element */}
-                        <div className="absolute -bottom-6 -left-6 -z-10 h-64 w-64 rounded-full bg-[#D97757]/10 blur-3xl" />
+                        {/* Floating Glass Badge */}
+                        <div className="absolute bottom-6 left-6 backdrop-blur-xl bg-white/60 dark:bg-white/10 border border-white/20 px-4 py-2 rounded-full shadow-lg text-sm text-gray-700 dark:text-white">
+                            🍽️ Fresh Meals Daily
+                        </div>
                     </motion.div>
+
                 </div>
             </div>
         </section>

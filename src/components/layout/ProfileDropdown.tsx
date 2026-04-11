@@ -25,7 +25,7 @@ export function ProfileDropdown({ user }: { user: any }) {
         ],
         PROVIDER: [
             {
-                href: "/provider-dashboard",
+                href: "/provider-dashboard/create-shop",
                 label: "Provider Dashboard",
                 icon: LayoutDashboardIcon,
             },

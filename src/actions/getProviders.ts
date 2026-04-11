@@ -2,6 +2,7 @@
 import { providerService } from "@/services/provider.service";
 import { cookies } from "next/headers";
 const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL as string;
+
 export const providerActions = async () => {
     const res = await providerService.getProviders();
     return res;
@@ -10,7 +11,7 @@ export const providerActions = async () => {
 export const createProviderShop = async (formData: FormData) => {
     try {
         const cookieStore = await cookies();
-        const response = await fetch(`${BACKEND_URL}/api/providers`, {
+        const response = await fetch(`${BACKEND_URL}/providers`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -43,7 +44,7 @@ export const createProviderShop = async (formData: FormData) => {
 export const createMealProvider = async (payload: any) => {
     try {
         const cookieStore = await cookies();
-        const response = await fetch(`${BACKEND_URL}/api/meals`, {
+        const response = await fetch(`${BACKEND_URL}/meals`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -76,7 +77,7 @@ export const createMealProvider = async (payload: any) => {
 export const getProviderMeals = async () => {
     try {
         const cookieStore = await cookies();
-        const response = await fetch(`${BACKEND_URL}/api/meals/provider/meals`, {
+        const response = await fetch(`${BACKEND_URL}/meals/provider/meals`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -108,7 +109,7 @@ export const getProviderMeals = async () => {
 export const updateMealProvider = async (mealId: string, payload: any) => {
     try {
         const cookieStore = await cookies();
-        const response = await fetch(`${BACKEND_URL}/api/meals/${mealId}`, {
+        const response = await fetch(`${BACKEND_URL}/meals/${mealId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -141,7 +142,7 @@ export const updateMealProvider = async (mealId: string, payload: any) => {
 export const deleteMealProvider = async (mealId: string) => {
     try {
         const cookieStore = await cookies();
-        const response = await fetch(`${BACKEND_URL}/api/meals/${mealId}`, {
+        const response = await fetch(`${BACKEND_URL}/meals/${mealId}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -173,7 +174,7 @@ export const deleteMealProvider = async (mealId: string) => {
 export const getMealById = async (mealId: string) => {
     try {
         const cookieStore = await cookies();
-        const response = await fetch(`${BACKEND_URL}/api/meals/${mealId}`, {
+        const response = await fetch(`${BACKEND_URL}/meals/${mealId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -205,7 +206,7 @@ export const getMealById = async (mealId: string) => {
 export const getProviderOrders = async () => {
     try {
         const cookieStore = await cookies();
-        const response = await fetch(`${BACKEND_URL}/api/meals/provider/orders`, {
+        const response = await fetch(`${BACKEND_URL}/meals/provider/orders`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -241,7 +242,7 @@ export const updateOrderStatusProvider = async (
     try {
         const cookieStore = await cookies();
         const response = await fetch(
-            `${BACKEND_URL}/api/meals/orders/${orderId}/status`,
+            `${BACKEND_URL}/meals/orders/${orderId}/status`,
             {
                 method: "PUT",
                 headers: {

@@ -31,26 +31,9 @@ export const metadata: Metadata = {
     title: "MealMate — Discover & Order Delicious Meals",
     description:
       "Browse meals, order from trusted providers, and track your food delivery with ease.",
-    url: "https://mealmate.app",
+    url: "https://mealmate-lemon.vercel.app",
     siteName: "MealMate",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "MealMate Food Ordering Platform",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
   },
-  // twitter: {
-  //   card: "summary_large_image",
-  //   title: "MealMate — Discover & Order Delicious Meals",
-  //   description:
-  //     "Order meals from local providers and enjoy fast, reliable delivery.",
-  //   images: ["/og-image.png"],
-  // },
   icons: {
     icon: "/favicon.ico",
   },

@@ -21,7 +21,8 @@ export const mealService = {
                 queryParams.append("maxPrice", params.maxPrice.toString());
             if (params?.sortBy) queryParams.append("sortBy", params.sortBy);
             if (params?.sortOrder) queryParams.append("sortOrder", params.sortOrder);
-            const url = `${BACKEND_URL}/api/meals${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
+
+            const url = `${BACKEND_URL}/meals${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
 
             const res = await fetch(url, {
                 method: "GET",
@@ -52,7 +53,7 @@ export const mealService = {
 
     getMealById: async function (id: string) {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/meals/${id}`, {
+            const res = await fetch(`${BACKEND_URL}/meals/${id}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -80,7 +81,7 @@ export const mealService = {
 
     getMealTypes: async function () {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/meals/types/list`, {
+            const res = await fetch(`${BACKEND_URL}/meals/types/list`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -101,7 +102,7 @@ export const mealService = {
 
     getDietaryOptions: async function () {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/meals/dietary-options/list`, {
+            const res = await fetch(`${BACKEND_URL}/meals/dietary-options/list`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -122,7 +123,7 @@ export const mealService = {
 
     getCuisineOptions: async function () {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/meals/cuisine-options/list`, {
+            const res = await fetch(`${BACKEND_URL}/meals/cuisine-options/list`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

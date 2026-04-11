@@ -3,12 +3,11 @@
 import { cookies } from "next/headers";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL as string;
-console.log(BACKEND_URL);
 
 export const getAllUsers = async () => {
     try {
         const cookieStore = await cookies();
-        const response = await fetch(`${BACKEND_URL}/api/users`, {
+        const response = await fetch(`${BACKEND_URL}/users`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -45,7 +44,7 @@ export const getAllUsers = async () => {
 export const updateUserStatus = async (userId: string, status: string) => {
     try {
         const cookieStore = await cookies();
-        const response = await fetch(`${BACKEND_URL}/api/users/${userId}`, {
+        const response = await fetch(`${BACKEND_URL}/users/${userId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

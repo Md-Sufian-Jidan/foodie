@@ -3,13 +3,14 @@
 import { cookies } from "next/headers";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL as string;
+// http://localhost:5000/api/v1
 
 export const getAdminDashboardStats = async () => {
     try {
         const cookieStore = await cookies();
 
         // Get all users
-        const usersRes = await fetch(`${BACKEND_URL}/api/users`, {
+        const usersRes = await fetch(`${BACKEND_URL}/users`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -19,7 +20,7 @@ export const getAdminDashboardStats = async () => {
         });
 
         // Get all orders
-        const ordersRes = await fetch(`${BACKEND_URL}/api/orders/all/orders`, {
+        const ordersRes = await fetch(`${BACKEND_URL}/orders`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -29,7 +30,7 @@ export const getAdminDashboardStats = async () => {
         });
 
         // Get all categories
-        const categoriesRes = await fetch(`${BACKEND_URL}/api/categories`, {
+        const categoriesRes = await fetch(`${BACKEND_URL}/categories/get-all-category`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -39,9 +40,7 @@ export const getAdminDashboardStats = async () => {
 
         const users = usersRes.ok ? await usersRes.json() : { data: [] };
         const orders = ordersRes.ok ? await ordersRes.json() : { data: [] };
-        const categories = categoriesRes.ok
-            ? await categoriesRes.json()
-            : { data: [] };
+        const categories = categoriesRes.ok ? await categoriesRes.json() : { data: [] };
 
         return {
             users: users.data || [],

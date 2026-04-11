@@ -13,7 +13,7 @@ interface CreateReviewData {
 export const createReview = async (data: CreateReviewData) => {
     try {
         const cookieStore = await cookies();
-        const response = await fetch(`${BACKEND_URL}/api/reviews`, {
+        const response = await fetch(`${BACKEND_URL}/reviews`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export const createReview = async (data: CreateReviewData) => {
 
 export const getMealReviews = async (mealId: string) => {
     try {
-        const response = await fetch(`${BACKEND_URL}/api/reviews/meal/${mealId}`, {
+        const response = await fetch(`${BACKEND_URL}/reviews/meal/${mealId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export const getMealReviews = async (mealId: string) => {
 export const getUserReviews = async () => {
     try {
         const cookieStore = await cookies();
-        const response = await fetch(`${BACKEND_URL}/api/reviews/user`, {
+        const response = await fetch(`${BACKEND_URL}/reviews/user`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -122,7 +122,7 @@ export const getUserReviews = async () => {
 export const getProviderReviews = async () => {
     try {
         const cookieStore = await cookies();
-        const response = await fetch(`${BACKEND_URL}/api/reviews/provider`, {
+        const response = await fetch(`${BACKEND_URL}/reviews/provider`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -158,7 +158,7 @@ export const getProviderReviews = async () => {
 
 export const getPopularMeals = async () => {
     try {
-        const response = await fetch(`${BACKEND_URL}/api/meals/popular/list`, {
+        const response = await fetch(`${BACKEND_URL}/meals/popular/list`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

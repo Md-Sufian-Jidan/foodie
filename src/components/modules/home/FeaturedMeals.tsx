@@ -1,103 +1,138 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import Image from "next/image";
+import { Star } from "lucide-react";
 
-const featuredMeals = [
+const meals = [
     {
-        id: "1",
-        name: "Margherita Pizza",
-        provider: "Luigi’s Italian",
+        id: 1,
+        title: "Cheese Burst Pizza",
+        image: "/meals/pizza.jpg",
         price: 12.99,
-        image: "/images/meals/pizza.jpg",
+        rating: 4.8,
     },
     {
-        id: "2",
-        name: "Sushi Platter",
-        provider: "Sakura Sushi",
-        price: 24.5,
-        image: "/images/meals/sushi.jpg",
+        id: 2,
+        title: "Chicken Burger",
+        image: "/meals/burger.jpg",
+        price: 8.99,
+        rating: 4.6,
     },
     {
-        id: "3",
-        name: "Vegan Buddha Bowl",
-        provider: "Green Eats",
-        price: 14.0,
-        image: "/images/meals/buddha-bowl.jpg",
+        id: 3,
+        title: "Grilled Sandwich",
+        image: "/meals/sandwich.jpg",
+        price: 6.99,
+        rating: 4.5,
     },
     {
-        id: "4",
-        name: "Chocolate Cake",
-        provider: "Sweet Tooth",
-        price: 6.5,
-        image: "/images/meals/cake.jpg",
+        id: 4,
+        title: "Beef Steak",
+        image: "/meals/steak.jpg",
+        price: 18.99,
+        rating: 4.9,
     },
-]
+    {
+        id: 5,
+        title: "Pasta Alfredo",
+        image: "/meals/pasta.jpg",
+        price: 10.99,
+        rating: 4.7,
+    },
+    {
+        id: 6,
+        title: "Chicken Fried Rice",
+        image: "/meals/rice.jpg",
+        price: 7.99,
+        rating: 4.6,
+    },
+];
+
+function Stars({ rating }: { rating: number }) {
+    return (
+        <div className="flex items-center gap-1">
+            {Array.from({ length: 5 }).map((_, i) => (
+                <Star
+                    key={i}
+                    className={`w-4 h-4 ${i < Math.round(rating)
+                            ? "text-yellow-400 fill-yellow-400"
+                            : "text-gray-300 dark:text-gray-600"
+                        }`}
+                />
+            ))}
+        </div>
+    );
+}
 
 export default function FeaturedMeals() {
     return (
-        <section className="bg-[#FAF9F7] py-16">
-            <div className="mx-auto max-w-7xl px-4">
-                {/* Section Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4 }}
-                    className="mb-10 max-w-xl"
-                >
-                    <h2 className="font-heading text-3xl font-bold text-[#1F2933]">
+        <section className="py-20 px-4">
+            <div className="max-w-7xl mx-auto">
+
+                {/* Header */}
+                <div className="text-center mb-14">
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">
                         Featured Meals
                     </h2>
-                    <p className="mt-2 font-body text-[#6B7280]">
-                        Hand-picked meals our customers love. Order now and enjoy fresh flavors!
+                    <p className="text-gray-500 dark:text-gray-400 mt-3">
+                        Popular dishes loved by our customers
                     </p>
-                </motion.div>
+                </div>
 
-                {/* Meals Grid */}
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    {featuredMeals.map((meal, index) => (
-                        <motion.div
+                {/* Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+                    {meals.map((meal) => (
+                        <div
                             key={meal.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
+                            className="group flex flex-col h-full rounded-2xl overflow-hidden
+              backdrop-blur-xl bg-white/60 dark:bg-white/10 border border-white/20
+              shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                         >
-                            <Card className="overflow-hidden">
-                                <div className="relative h-48 w-full">
-                                    <img
-                                        src={meal.image}
-                                        alt={meal.name}
-                                        className="h-full w-full object-cover"
-                                    />
+
+                            {/* Image */}
+                            <div className="relative h-44 w-full overflow-hidden">
+                                <Image
+                                    src={meal.image}
+                                    alt={meal.title}
+                                    fill
+                                    className="object-cover group-hover:scale-110 transition-transform duration-300"
+                                />
+
+                                {/* Gradient overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                            </div>
+
+                            {/* Content */}
+                            <div className="flex flex-col flex-1 p-4">
+
+                                {/* Title */}
+                                <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                                    {meal.title}
+                                </h3>
+
+                                {/* Rating */}
+                                <div className="mt-2">
+                                    <Stars rating={meal.rating} />
                                 </div>
-                                <CardContent className="pt-4">
-                                    <h3 className="font-heading text-lg text-[#1F2933]">
-                                        {meal.name}
-                                    </h3>
-                                    <p className="mt-1 font-body text-sm text-[#6B7280]">
-                                        {meal.provider}
-                                    </p>
-                                    <p className="mt-2 font-body font-semibold text-[#D97757]">
-                                        ${meal.price.toFixed(2)}
-                                    </p>
-                                </CardContent>
-                                <CardFooter className="pt-2">
-                                    <Button
-                                        asChild
-                                        className="w-full bg-[#D97757] hover:bg-[#c96a4f]"
-                                    >
-                                        <Link href={`/meals/${meal.id}`}>Add to Cart</Link>
-                                    </Button>
-                                </CardFooter>
-                            </Card>
-                        </motion.div>
+
+                                {/* Price */}
+                                <p className="mt-2 text-[#D97757] font-bold text-lg">
+                                    ${meal.price}
+                                </p>
+
+                                {/* Spacer */}
+                                <div className="flex-1" />
+
+                                {/* Button */}
+                                <button className="mt-4 w-full py-2 rounded-full bg-[#D97757] text-white font-medium hover:bg-[#D97757]/90 transition-all">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>
         </section>
-    )
+    );
 }

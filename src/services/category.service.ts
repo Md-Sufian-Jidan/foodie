@@ -1,8 +1,9 @@
 const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL as string;
+
 export const categoryService = {
     getCategories: async function () {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/categories`, {
+            const res = await fetch(`${BACKEND_URL}/categories/get-all-category`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -31,7 +32,7 @@ export const categoryService = {
 
     createCategory: async function (name: string, cookie: any) {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/categories`, {
+            const res = await fetch(`${BACKEND_URL}/categories/create-category`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -66,7 +67,7 @@ export const categoryService = {
 
     updateCategory: async function (id: string, name: string, cookie: any) {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/categories/${id}`, {
+            const res = await fetch(`${BACKEND_URL}/categories/${id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -101,7 +102,7 @@ export const categoryService = {
 
     deleteCategory: async function (id: string, cookie: any) {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/categories/${id}`, {
+            const res = await fetch(`${BACKEND_URL}/categories/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

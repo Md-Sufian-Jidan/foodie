@@ -110,11 +110,11 @@ export default function AllUsersClient({ users }: AllUsersClientProps) {
   // Calculate statistics
   const stats = {
     total: users.length,
-    active: users.filter((u) => u.status === "active").length,
-    inactive: users.filter((u) => u.status === "inactive").length,
-    admins: users.filter((u) => u.role === "admin").length,
-    providers: users.filter((u) => u.role === "provider").length,
-    customers: users.filter((u) => u.role === "customer").length,
+    active: users.filter((u) => u.status === "ACTIVE").length,
+    inactive: users.filter((u) => u.status === "INACTIVE").length,
+    admins: users.filter((u) => u.role === "ADMIN").length,
+    providers: users.filter((u) => u.role === "PROVIDER").length,
+    customers: users.filter((u) => u.role === "CUSTOMER").length,
   };
 
   return (
@@ -217,9 +217,9 @@ export default function AllUsersClient({ users }: AllUsersClientProps) {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Roles</SelectItem>
-                <SelectItem value="admin">Admin</SelectItem>
-                <SelectItem value="provider">Provider</SelectItem>
-                <SelectItem value="customer">Customer</SelectItem>
+                <SelectItem value="ADMIN">Admin</SelectItem>
+                <SelectItem value="PROVIDER">Provider</SelectItem>
+                <SelectItem value="CUSTOMER">Customer</SelectItem>
               </SelectContent>
             </Select>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -331,8 +331,8 @@ export default function AllUsersClient({ users }: AllUsersClientProps) {
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="active">Active</SelectItem>
-                              <SelectItem value="inactive">Inactive</SelectItem>
+                              <SelectItem value="ACTIVE">Active</SelectItem>
+                              <SelectItem value="INACTIVE">Inactive</SelectItem>
                             </SelectContent>
                           </Select>
                         )}

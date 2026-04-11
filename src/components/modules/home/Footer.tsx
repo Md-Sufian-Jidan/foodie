@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import Link from "next/link"
+import Link from "next/link";
 import {
     Facebook,
     Github,
@@ -9,152 +9,165 @@ import {
     Mail,
     MapPin,
     Phone,
-    ArrowRight
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+    ArrowRight,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function Footer() {
     return (
-        <footer className="bg-[#FAF9F7] text-[#1F2933] pt-20 pb-10 font-jakarta border-t border-[#1F2933]/5">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <footer className="relative bg-gradient-to-b from-[#FAF9F7] to-white dark:from-gray-950 dark:to-gray-900 text-[#1F2933] dark:text-white pt-20 pb-10 border-t border-white/10">
 
-                {/* Top Section: Newsletter & Branding */}
-                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-12 pb-16 border-b border-[#1F2933]/10 mb-16">
+            {/* Glass Background Effect */}
+            <div className="absolute inset-0 backdrop-blur-3xl opacity-40 pointer-events-none" />
+
+            <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+
+                {/* TOP SECTION */}
+                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-12 pb-16 mb-16">
+
+                    {/* Brand */}
                     <div className="max-w-md">
-                        <Link href="/" className="flex items-center gap-2 group shrink-0 mb-6">
-                            <div className="bg-[#D97757] p-2 rounded-lg group-hover:rotate-12 transition-transform shadow-lg shadow-[#D97757]/20">
+                        <Link href="/" className="flex items-center gap-2 group mb-6">
+                            <div className="bg-[#D97757] p-2 rounded-lg group-hover:rotate-12 transition-transform shadow-lg">
                                 <UtensilsCrossed size={18} className="text-white" />
                             </div>
-                            <span className="font-serif text-2xl font-bold tracking-tight text-[#1F2933] md:text-3xl">
+                            <span className="font-serif text-2xl font-bold">
                                 MealMate
                             </span>
                         </Link>
-                        <p className="text-[#6B7280] text-sm leading-relaxed">
-                            Elevating local flavors. Join our newsletter for exclusive recipes,
-                            provider stories, and special neighborhood discounts.
+
+                        <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                            Elevating local flavors with a modern multi-vendor food platform.
+                            Discover, order, and enjoy meals from trusted kitchens near you.
                         </p>
                     </div>
 
-                    <div className="flex w-full max-w-sm items-center space-x-2">
-                        <Input
-                            type="email"
-                            placeholder="Your email address"
-                            className="bg-white border-[#1F2933]/10 text-[#1F2933] placeholder:text-[#9CA3AF] focus:border-[#D97757] focus:ring-[#D97757]/10 transition-all rounded-full px-6"
-                        />
-                        <Button className="bg-[#D97757] hover:bg-[#D97757]/90 shrink-0 rounded-full px-6">
-                            Join <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
+                    {/* Newsletter (Glass Card) */}
+                    <div className="w-full max-w-md">
+                        <div className="backdrop-blur-xl bg-white/60 dark:bg-white/10 border border-white/20 shadow-lg rounded-2xl p-4 flex items-center gap-2">
+
+                            <Input
+                                type="email"
+                                placeholder="Your email address"
+                                className="bg-transparent border-none focus-visible:ring-0 text-sm"
+                            />
+
+                            <Button className="bg-[#D97757] hover:bg-[#D97757]/90 rounded-full px-5">
+                                Join <ArrowRight className="ml-1 h-4 w-4" />
+                            </Button>
+                        </div>
+
+                        <p className="text-xs text-gray-400 mt-3 text-center">
+                            Get weekly deals & updates — no spam.
+                        </p>
                     </div>
                 </div>
 
-                {/* Main Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                {/* MAIN GRID */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+
                     {/* Mission */}
-                    <div className="space-y-6">
-                        <h4 className="font-serif text-xl font-bold text-[#1F2933]">Our Mission</h4>
-                        <p className="text-[#6B7280] text-sm leading-relaxed">
-                            Connecting community kitchens with food lovers. We believe the best meals
-                            aren't just made; they're shared.
+                    <div className="space-y-5">
+                        <h4 className="font-semibold text-lg">Our Mission</h4>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                            Connecting food lovers with local kitchens through fast, reliable, and delicious delivery.
                         </p>
-                        <div className="flex gap-4">
-                            <SocialLink icon={<Github size={18} />} href="https://github.com/Md-Sufian-Jidan" />
-                            <SocialLink icon={<Linkedin size={18} />} href="https://www.linkedin.com/in/md-abu-sufian-jidan/" />
-                            <SocialLink icon={<Facebook size={18} />} href="https://www.facebook.com/profile.php?id=61580036619103" />
+
+                        <div className="flex gap-3">
+                            <SocialLink icon={<Github size={18} />} href="https://github.com" />
+                            <SocialLink icon={<Linkedin size={18} />} href="https://linkedin.com" />
+                            <SocialLink icon={<Facebook size={18} />} href="https://facebook.com" />
                         </div>
                     </div>
 
-                    {/* Navigation */}
-                    <div className="space-y-6">
-                        <h4 className="font-serif text-xl font-bold text-[#1F2933]">Discover</h4>
-                        <ul className="space-y-4 text-sm text-[#6B7280]">
-                            <li><FooterLink href="/meals">Browse All Meals</FooterLink></li>
-                            <li><FooterLink href="/categories">Cuisines</FooterLink></li>
-                            <li><FooterLink href="/providers">Our Kitchens</FooterLink></li>
-                            <li><FooterLink href="/offers">Special Offers</FooterLink></li>
+                    {/* Discover */}
+                    <div className="space-y-5">
+                        <h4 className="font-semibold text-lg">Discover</h4>
+                        <ul className="space-y-3 text-sm text-gray-500 dark:text-gray-400">
+                            <li><FooterLink href="/meals">All Meals</FooterLink></li>
+                            <li><FooterLink href="/categories">Categories</FooterLink></li>
+                            <li><FooterLink href="/providers">Vendors</FooterLink></li>
+                            <li><FooterLink href="/offers">Offers</FooterLink></li>
                         </ul>
                     </div>
 
-                    {/* Join the Platform */}
-                    <div className="space-y-6">
-                        <h4 className="font-serif text-xl font-bold text-[#1F2933]">Partnerships</h4>
-                        <ul className="space-y-4 text-sm text-[#6B7280]">
-                            <li><FooterLink href="/register?role=PROVIDER">List Your Kitchen</FooterLink></li>
-                            <li><FooterLink href="/logistics">Delivery Partners</FooterLink></li>
-                            <li><FooterLink href="/guidelines">Kitchen Standards</FooterLink></li>
-                            <li><FooterLink href="/help">Provider FAQ</FooterLink></li>
+                    {/* Partnerships */}
+                    <div className="space-y-5">
+                        <h4 className="font-semibold text-lg">Partnerships</h4>
+                        <ul className="space-y-3 text-sm text-gray-500 dark:text-gray-400">
+                            <li><FooterLink href="/register">Become Vendor</FooterLink></li>
+                            <li><FooterLink href="/delivery">Delivery Partners</FooterLink></li>
+                            <li><FooterLink href="/guidelines">Guidelines</FooterLink></li>
+                            <li><FooterLink href="/support">Support</FooterLink></li>
                         </ul>
                     </div>
 
-                    {/* Contact Info */}
-                    <div className="space-y-6">
-                        <h4 className="font-serif text-xl font-bold text-[#1F2933]">Get in Touch</h4>
-                        <ul className="space-y-4 text-sm text-[#6B7280]">
-                            <li className="flex items-start gap-3">
-                                <MapPin size={18} className="text-[#D97757] shrink-0" />
-                                <span>Chasara Road, <br />Narayanganj, Dhaka</span>
-                            </li>
-                            <li className="flex items-center gap-3">
-                                <Phone size={18} className="text-[#D97757] shrink-0" />
-                                {/* tel: protocol opens the dialer */}
-                                <a
-                                    href="tel:+8801906844598"
-                                    className="hover:text-[#D97757] transition-colors font-medium"
-                                >
+                    {/* Contact */}
+                    <div className="space-y-5">
+                        <h4 className="font-semibold text-lg">Contact</h4>
+
+                        <div className="space-y-4 text-sm text-gray-500 dark:text-gray-400">
+
+                            <div className="flex gap-3">
+                                <MapPin className="text-[#D97757]" />
+                                <span>Narayanganj, Dhaka, Bangladesh</span>
+                            </div>
+
+                            <div className="flex gap-3">
+                                <Phone className="text-[#D97757]" />
+                                <a href="tel:+8801906844598" className="hover:text-[#D97757]">
                                     +880 1906 844 598
                                 </a>
-                            </li>
-                            <li className="flex items-center gap-3">
-                                <Mail size={18} className="text-[#D97757] shrink-0" />
-                                {/* mailto: protocol opens the default email client */}
-                                <a
-                                    href="mailto:jidanjiyaj03@gmail.com"
-                                    className="truncate decoration-[#D97757]/30 hover:text-[#D97757] hover:decoration-[#D97757] transition-colors font-medium"
-                                >
-                                    jidanjiyaj03@gmail.com
+                            </div>
+
+                            <div className="flex gap-3">
+                                <Mail className="text-[#D97757]" />
+                                <a href="mailto:contact@mealmate.com" className="hover:text-[#D97757]">
+                                    contact@mealmate.com
                                 </a>
-                            </li>
-                        </ul>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="pt-8 border-t border-[#1F2933]/5 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <p className="text-xs text-[#6B7280] text-center md:text-left">
-                        &copy; {new Date().getFullYear()} MealMate. Handcrafted with passion in Narayanganj.
+                {/* BOTTOM BAR */}
+                <div className="flex flex-col md:flex-row justify-between items-center gap-5 pt-8 border-t border-white/10">
+
+                    <p className="text-xs text-gray-400">
+                        © {new Date().getFullYear()} MealMate — All rights reserved
                     </p>
-                    <div className="flex flex-wrap justify-center gap-8 text-xs text-[#6B7280]">
-                        <Link href="/privacy" className="hover:text-[#D97757] transition-colors">Privacy Policy</Link>
-                        <Link href="/terms" className="hover:text-[#D97757] transition-colors">Terms of Service</Link>
-                        <Link href="/cookies" className="hover:text-[#D97757] transition-colors">Cookie Settings</Link>
+
+                    <div className="flex gap-6 text-xs text-gray-400">
+                        <Link className="hover:text-[#D97757]" href="/privacy">Privacy</Link>
+                        <Link className="hover:text-[#D97757]" href="/terms">Terms</Link>
+                        <Link className="hover:text-[#D97757]" href="/cookies">Cookies</Link>
                     </div>
                 </div>
+
             </div>
         </footer>
-    )
+    );
 }
 
-function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
+function FooterLink({ href, children }: any) {
     return (
-        <Link
-            href={href}
-            className="hover:text-[#D97757] transition-colors flex items-center group font-medium"
-        >
-            <span className="w-0 group-hover:w-2 h-[1px] bg-[#D97757] mr-0 group-hover:mr-2 transition-all"></span>
+        <Link href={href} className="group flex items-center gap-2 hover:text-[#D97757] transition">
+            <span className="w-0 group-hover:w-2 h-[2px] bg-[#D97757] transition-all" />
             {children}
         </Link>
-    )
+    );
 }
 
-function SocialLink({ icon, href }: { icon: React.ReactNode; href: string }) {
+function SocialLink({ icon, href }: any) {
     return (
         <a
             href={href}
             target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full bg-white border border-[#1F2933]/10 flex items-center justify-center text-[#1F2933] shadow-sm hover:shadow-md hover:bg-[#D97757] hover:text-white hover:border-[#D97757] transition-all duration-300"
+            className="w-9 h-9 rounded-full backdrop-blur-xl bg-white/60 dark:bg-white/10 border border-white/20 flex items-center justify-center hover:bg-[#D97757] hover:text-white transition"
         >
             {icon}
         </a>
-    )
+    );
 }

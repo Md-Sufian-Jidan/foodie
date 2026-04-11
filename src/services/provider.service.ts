@@ -2,7 +2,7 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL as string;
 export const providerService = {
     getProviders: async function () {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/providers`, {
+            const res = await fetch(`${BACKEND_URL}/providers`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -31,7 +31,7 @@ export const providerService = {
 
     getProviderById: async function (id: string) {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/providers/${id}`, {
+            const res = await fetch(`${BACKEND_URL}/providers/${id}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

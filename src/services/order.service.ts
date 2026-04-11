@@ -13,7 +13,7 @@ export const orderService = {
         cookie: any,
     ) {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/orders`, {
+            const res = await fetch(`${BACKEND_URL}/orders`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export const orderService = {
 
     getMyOrders: async function (cookie: any) {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/orders`, {
+            const res = await fetch(`${BACKEND_URL}/orders/my-orders`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -81,7 +81,7 @@ export const orderService = {
 
     getOrderDetails: async function (orderId: string, cookie: any) {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/orders/${orderId}`, {
+            const res = await fetch(`${BACKEND_URL}/orders/${orderId}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -114,7 +114,7 @@ export const orderService = {
 
     orderStatusTracking: async function (orderId: string, cookie: any) {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/orders/track/${orderId}`, {
+            const res = await fetch(`${BACKEND_URL}/orders/track/${orderId}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -140,7 +140,7 @@ export const orderService = {
 
     cancelOrder: async function (orderId: string, cookie: any) {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/orders/cancel/${orderId}`, {
+            const res = await fetch(`${BACKEND_URL}/orders/cancel/${orderId}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -175,7 +175,7 @@ export const orderService = {
 
     getAllOrdersAdmin: async function (cookie: any) {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/orders/all/orders`, {
+            const res = await fetch(`${BACKEND_URL}/orders`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
