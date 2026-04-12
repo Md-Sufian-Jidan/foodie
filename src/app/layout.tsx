@@ -4,6 +4,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/providers/theme-provider"
 import Transition from "@/components/layout/Transition"
 import { Toaster } from "@/components/ui/sonner"
+import { AiChatBot } from "@/components/modules/ai/AiChatBot"
 
 const merriweather = Merriweather({
   subsets: ["latin"],
@@ -62,6 +63,7 @@ export default function RootLayout({
         >
           <Transition>{children}</Transition>
           <Toaster richColors />
+          <AiChatBot />
         </ThemeProvider>
       </body>
     </html>
