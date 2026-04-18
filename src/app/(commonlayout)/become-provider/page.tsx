@@ -3,6 +3,60 @@
 import { RegisterForm } from "@/components/modules/authentication/RegisterForm";
 import { motion } from "framer-motion";
 import { UtensilsCrossed, ShieldCheck, Zap } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Become a Provider | MealMate - Fresh Multi-Vendor Food Delivery Platform",
+    description:
+        "Join MealMate as a vendor and reach thousands of customers. Easy menu management, secure payments, and instant growth for your food business.",
+    keywords: [
+        "become a vendor",
+        "food vendor registration",
+        "sell food online",
+        "restaurant partner",
+        "mealmate vendor",
+    ],
+    authors: [{
+        name: "Md Abu Sufian Jidan",
+        url: "https://mdabusufianjidan.vercel.app"
+    }],
+    openGraph: {
+        title: "Become a Provider | MealMate - Fresh Food Delivered Fast",
+        description:
+            "Join MealMate as a vendor and reach thousands of customers with easy menu management and secure payments.",
+        url: "https://mealmate-lemon.vercel.app/become-provider",
+        siteName: "MealMate",
+        type: "website",
+        images: [
+            {
+                url: "https://i.ibb.co/99pqNzY5/mealmate.png",
+                width: 1200,
+                height: 630,
+                alt: "MealMate Vendor Registration",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Become a Provider | MealMate - Food Delivery Platform",
+        description:
+            "Join MealMate as a vendor and reach thousands of customers with easy menu management and secure payments.",
+        images: ["https://i.ibb.co/99pqNzY5/mealmate.png"],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        nocache: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-snippet': -1,
+            'max-image-preview': 'large',
+            'max-video-preview': -1,
+        }
+    },
+    metadataBase: new URL("https://mealmate-lemon.vercel.app"),
+};
 
 export default function Page() {
     return (

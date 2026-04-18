@@ -4,21 +4,54 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { mealService } from "@/services/meal.service";
-import {
-    ArrowLeft,
-    ChefHat,
-    Clock,
-    Flame,
-    Leaf,
-    LocationEditIcon,
-    Shapes,
-    Star,
-    User,
-    UtensilsCrossed,
-} from "lucide-react";
+import { ArrowLeft, ChefHat, Clock, Flame, Leaf, LocationEditIcon, Shapes, Star, User, UtensilsCrossed, } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Meal Details | MealMate - Fresh Multi-Vendor Food Delivery Platform",
+    description:
+        "Explore detailed information about this delicious meal, including ingredients, dietary information, and provider details.",
+    keywords: [
+        "meal details",
+        "food",
+        "delivery",
+        "ingredients",
+        "dietary",
+        "spice level",
+        "mealmate details",
+    ],
+    authors: [{
+        name: "Md Abu Sufian Jidan",
+        url: "https://mdabusufianjidan.vercel.app"
+    }],
+    openGraph: {
+        title: "Meal Details | MealMate - Fresh Food Delivered Fast",
+        description:
+            "Explore detailed information about this delicious meal.",
+        url: "https://mealmate-lemon.vercel.app/meals/[id]",
+        siteName: "MealMate",
+        type: "website",
+        images: [
+            {
+                url: "https://i.ibb.co/99pqNzY5/mealmate.png",
+                width: 1200,
+                height: 630,
+                alt: "MealMate Meal Details",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Meal Details | MealMate - Food Delivery Platform",
+        description:
+            "Explore detailed information about this delicious meal.",
+        images: ["https://i.ibb.co/99pqNzY5/mealmate.png"],
+    },
+    metadataBase: new URL("https://mealmate-lemon.vercel.app"),
+};
 
 export default async function MealDetailsPage({
     params,

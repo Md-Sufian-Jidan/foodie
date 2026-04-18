@@ -258,3 +258,24 @@ export const demoMeals = [
 export const getMealById = (id: string) => {
     return demoMeals.find((meal) => meal.id === id);
 };
+
+export const blogs = [
+    {
+        id: "1",
+        title: "How MealMate is Changing Food Delivery",
+        image: "/blog/blog1.jpg",
+        author: "MealMate Team",
+        date: "April 11, 2026",
+        readTime: "5 min read",
+        content: `
+MealMate is revolutionizing local food delivery by connecting customers with trusted vendors.
+
+We focus on:
+- Fast delivery
+- Quality food
+- Real-time tracking
+
+Our mission is to empower local kitchens and bring fresh meals to your doorstep.
+        `,
+    },
+];

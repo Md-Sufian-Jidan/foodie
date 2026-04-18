@@ -1,20 +1,61 @@
 import { getProviderOrders } from "@/actions/getProviders";
 import OrderRow from "@/components/modules/providers/OrderRow";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
-import {
-    Table,
-    TableBody,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableHead, TableHeader, TableRow, } from "@/components/ui/table";
 import { Clock, DollarSign, Package, ShoppingBag } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "My Orders | MealMate - Fresh Multi-Vendor Food Delivery Platform",
+    description:
+        "View and manage your restaurant orders as a provider on MealMate platform.",
+    keywords: [
+        "my orders",
+        "provider orders",
+        "order management",
+        "mealmate orders",
+    ],
+    authors: [{
+        name: "Md Abu Sufian Jidan",
+        url: "https://mdabusufianjidan.vercel.app"
+    }],
+    openGraph: {
+        title: "My Orders | MealMate - Fresh Food Delivered Fast",
+        description:
+            "View and manage your restaurant orders.",
+        url: "https://mealmate-lemon.vercel.app/dashboard/provider/my-orders",
+        siteName: "MealMate",
+        type: "website",
+        images: [
+            {
+                url: "https://i.ibb.co/99pqNzY5/mealmate.png",
+                width: 1200,
+                height: 630,
+                alt: "MealMate My Orders",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "My Orders | MealMate - Food Delivery Platform",
+        description:
+            "View and manage your restaurant orders.",
+        images: ["https://i.ibb.co/99pqNzY5/mealmate.png"],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        nocache: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-snippet': -1,
+            'max-image-preview': 'large',
+            'max-video-preview': -1,
+        }
+    },
+    metadataBase: new URL("https://mealmate-lemon.vercel.app"),
+};
 
 export default async function MyOrdersPage() {
     const { data: ordersData } = await getProviderOrders();

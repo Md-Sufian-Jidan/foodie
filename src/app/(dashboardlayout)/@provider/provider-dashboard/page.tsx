@@ -1,6 +1,59 @@
 import { getProviderMeals, getProviderOrders } from "@/actions/getProviders";
 import { getProviderReviews } from "@/actions/reviews";
 import ProviderDashboardClient from "@/components/modules/providers/ProviderDashboard";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Provider Dashboard | MealMate - Fresh Multi-Vendor Food Delivery Platform",
+    description:
+        "Manage your meals, orders, and business performance as a provider on MealMate platform.",
+    keywords: [
+        "provider dashboard",
+        "meal provider",
+        "restaurant dashboard",
+        "mealmate provider",
+    ],
+    authors: [{
+        name: "Md Abu Sufian Jidan",
+        url: "https://mdabusufianjidan.vercel.app"
+    }],
+    openGraph: {
+        title: "Provider Dashboard | MealMate - Fresh Food Delivered Fast",
+        description:
+            "Manage your meals, orders, and business performance.",
+        url: "https://mealmate-lemon.vercel.app/dashboard/provider",
+        siteName: "MealMate",
+        type: "website",
+        images: [
+            {
+                url: "https://i.ibb.co/99pqNzY5/mealmate.png",
+                width: 1200,
+                height: 630,
+                alt: "MealMate Provider Dashboard",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Provider Dashboard | MealMate - Food Delivery Platform",
+        description:
+            "Manage your meals, orders, and business performance.",
+        images: ["https://i.ibb.co/99pqNzY5/mealmate.png"],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        nocache: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-snippet': -1,
+            'max-image-preview': 'large',
+            'max-video-preview': -1,
+        }
+    },
+    metadataBase: new URL("https://mealmate-lemon.vercel.app"),
+};
 
 export default async function ProviderDashboard() {
     const [{ data: mealsData }, { data: ordersData }, { data: reviewsResponse }] =
@@ -18,10 +71,6 @@ export default async function ProviderDashboard() {
         averageRating: 0,
         ratingDistribution: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
     };
-
-    // console.log("Meals", meals);
-    // console.log("Orders", orders);
-    // console.log("Reviews data", reviewsData)
 
     // Get shop name from meals data (provider info)
     const shopName = meals[0]?.provider?.shopName || "My Shop";

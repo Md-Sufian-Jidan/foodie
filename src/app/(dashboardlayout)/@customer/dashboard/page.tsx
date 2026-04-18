@@ -2,28 +2,68 @@ import { getUserReviews } from "@/actions/reviews";
 import { CustomerReviews } from "@/components/modules/customer/CustomerReview";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card";
 import { orderService } from "@/services/order.service";
 import { userService } from "@/services/user.service";
-import {
-    ArrowRight,
-    CheckCircle2,
-    Clock,
-    Package,
-    ShoppingBag,
-    TrendingUp,
-    User,
-    XCircle,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, Package, ShoppingBag, TrendingUp, User, XCircle, } from "lucide-react";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Dashboard | MealMate - Fresh Multi-Vendor Food Delivery Platform",
+    description:
+        "Customer dashboard for MealMate - track orders, manage profile, and view reviews.",
+    keywords: [
+        "dashboard",
+        "customer dashboard",
+        "mealmate dashboard",
+        "order tracking",
+        "profile",
+        "reviews",
+    ],
+    authors: [{
+        name: "Md Abu Sufian Jidan",
+        url: "https://mdabusufianjidan.vercel.app"
+    }],
+    openGraph: {
+        title: "Dashboard | MealMate - Fresh Food Delivered Fast",
+        description:
+            "Track your orders and manage your account.",
+        url: "https://mealmate-lemon.vercel.app/dashboard",
+        siteName: "MealMate",
+        type: "website",
+        images: [
+            {
+                url: "https://i.ibb.co/99pqNzY5/mealmate.png",
+                width: 1200,
+                height: 630,
+                alt: "MealMate Dashboard",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Dashboard | MealMate - Food Delivery Platform",
+        description:
+            "Track your orders and manage your account.",
+        images: ["https://i.ibb.co/99pqNzY5/mealmate.png"],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        nocache: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-snippet': -1,
+            'max-image-preview': 'large',
+            'max-video-preview': -1,
+        }
+    },
+    metadataBase: new URL("https://mealmate-lemon.vercel.app"),
+};
 
 interface OrderStats {
     total: number;

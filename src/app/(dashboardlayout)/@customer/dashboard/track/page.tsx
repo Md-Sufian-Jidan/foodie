@@ -2,21 +2,66 @@
 
 import { orderStatusTracking } from "@/actions/orders";
 import { OrderStatusTracking } from "@/components/modules/customer/OrderStatusTracking";
-// import { orderStatusTracking } from "@/actions/orders";
-// import { OrderStatusTracking } from "@/components/modules/customer/OrderStatusTracking";
 import { Button } from "@/components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AlertCircle, Package, Search } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Track Order | MealMate - Fresh Multi-Vendor Food Delivery Platform",
+    description:
+        "Track your order status and get real-time updates on your delivery.",
+    keywords: [
+        "track order",
+        "order tracking",
+        "mealmate order tracking",
+        "delivery tracking",
+    ],
+    authors: [{
+        name: "Md Abu Sufian Jidan",
+        url: "https://mdabusufianjidan.vercel.app"
+    }],
+    openGraph: {
+        title: "Track Order | MealMate - Fresh Food Delivered Fast",
+        description:
+            "Track your order status and get real-time updates.",
+        url: "https://mealmate-lemon.vercel.app/dashboard/track",
+        siteName: "MealMate",
+        type: "website",
+        images: [
+            {
+                url: "https://i.ibb.co/99pqNzY5/mealmate.png",
+                width: 1200,
+                height: 630,
+                alt: "MealMate Track Order",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Track Order | MealMate - Food Delivery Platform",
+        description:
+            "Track your order status and get real-time updates.",
+        images: ["https://i.ibb.co/99pqNzY5/mealmate.png"],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        nocache: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-snippet': -1,
+            'max-image-preview': 'large',
+            'max-video-preview': -1,
+        }
+    },
+    metadataBase: new URL("https://mealmate-lemon.vercel.app"),
+};
 
 export default function TrackOrderPage() {
     const [orderId, setOrderId] = useState("");

@@ -1,21 +1,62 @@
 import { getProviderMeals } from "@/actions/getProviders";
 import { CreateShopForm } from "@/components/modules/providers/CreateShop";
 import { Button } from "@/components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
-import {
-    ArrowRight,
-    CheckCircle2,
-    LayoutDashboard,
-    Package,
-    Store,
-} from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card";
+import { ArrowRight, CheckCircle2, LayoutDashboard, Package, Store, } from "lucide-react";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Create Shop | MealMate - Fresh Multi-Vendor Food Delivery Platform",
+    description:
+        "Create your shop and start selling delicious meals to hungry customers on MealMate platform.",
+    keywords: [
+        "create shop",
+        "food shop",
+        "restaurant setup",
+        "mealmate shop",
+    ],
+    authors: [{
+        name: "Md Abu Sufian Jidan",
+        url: "https://mdabusufianjidan.vercel.app"
+    }],
+    openGraph: {
+        title: "Create Shop | MealMate - Fresh Food Delivered Fast",
+        description:
+            "Create your shop and start selling delicious meals.",
+        url: "https://mealmate-lemon.vercel.app/dashboard/provider/create-shop",
+        siteName: "MealMate",
+        type: "website",
+        images: [
+            {
+                url: "https://i.ibb.co/99pqNzY5/mealmate.png",
+                width: 1200,
+                height: 630,
+                alt: "MealMate Create Shop",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Create Shop | MealMate - Food Delivery Platform",
+        description:
+            "Create your shop and start selling delicious meals.",
+        images: ["https://i.ibb.co/99pqNzY5/mealmate.png"],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        nocache: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-snippet': -1,
+            'max-image-preview': 'large',
+            'max-video-preview': -1,
+        }
+    },
+    metadataBase: new URL("https://mealmate-lemon.vercel.app"),
+};
 
 export default async function page() {
     const { data: providers } = await getProviderMeals();

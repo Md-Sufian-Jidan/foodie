@@ -1,32 +1,60 @@
 import { notFound } from "next/navigation";
 import { Card } from "@/components/ui/card";
+import { Metadata } from "next";
+import { blogs } from "@/lib/fakeData";
 
-export const metadata = {
-    title: "Blog Details | MealMate",
+export const metadata: Metadata = {
+    title: "Blog Details | MealMate - Fresh Multi-Vendor Food Delivery Platform",
     description: "Read detailed food stories and updates from MealMate.",
-};
-
-// 🔥 Dummy data (replace with DB later)
-const blogs = [
-    {
-        id: "1",
-        title: "How MealMate is Changing Food Delivery",
-        image: "/blog/blog1.jpg",
-        author: "MealMate Team",
-        date: "April 11, 2026",
-        readTime: "5 min read",
-        content: `
-MealMate is revolutionizing local food delivery by connecting customers with trusted vendors.
-
-We focus on:
-- Fast delivery
-- Quality food
-- Real-time tracking
-
-Our mission is to empower local kitchens and bring fresh meals to your doorstep.
-        `,
+    keywords: [
+        "food blog",
+        "recipes",
+        "food stories",
+        "vendor insights",
+        "mealmate blog",
+        "food updates",
+    ],
+    authors: [{
+        name: "Md Abu Sufian Jidan",
+        url: "https://mdabusufianjidan.vercel.app"
+    }],
+    openGraph: {
+        title: "Blog Details | MealMate - Fresh Food Delivered Fast",
+        description:
+            "Read detailed food stories, vendor insights, recipes, and updates from MealMate.",
+        url: "https://mealmate-lemon.vercel.app/blog/[id]",
+        siteName: "MealMate",
+        type: "article",
+        images: [
+            {
+                url: "https://i.ibb.co/99pqNzY5/mealmate.png",
+                width: 1200,
+                height: 630,
+                alt: "MealMate Blog Details",
+            },
+        ],
     },
-];
+    twitter: {
+        card: "summary_large_image",
+        title: "Blog Details | MealMate - Food Delivery Platform",
+        description:
+            "Read detailed food stories and updates from MealMate.",
+        images: ["https://i.ibb.co/99pqNzY5/mealmate.png"],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        nocache: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-snippet': -1,
+            'max-image-preview': 'large',
+            'max-video-preview': -1,
+        }
+    },
+    metadataBase: new URL("https://mealmate-lemon.vercel.app"),
+};
 
 export default async function BlogDetailsPage({ params, }: { params: { id: string }; }) {
     const { id } = await params;

@@ -1,3 +1,44 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Terms and Conditions | MealMate - Fresh Multi-Vendor Food Delivery Platform",
+    description:
+        "Read the terms and conditions for using MealMate platform, including user accounts, orders, payments, and content guidelines.",
+    keywords: [
+        "terms and conditions",
+        "terms of service",
+        "user agreement",
+        "mealmate terms",
+    ],
+    authors: [{
+        name: "Md Abu Sufian Jidan",
+        url: "https://mdabusufianjidan.vercel.app"
+    }],
+    openGraph: {
+        title: "Terms and Conditions | MealMate - Fresh Food Delivered Fast",
+        description:
+            "Read the terms and conditions for using MealMate platform.",
+        url: "https://mealmate-lemon.vercel.app/terms",
+        siteName: "MealMate",
+        type: "website",
+        images: [
+            {
+                url: "https://i.ibb.co/99pqNzY5/mealmate.png",
+                width: 1200,
+                height: 630,
+                alt: "MealMate Terms and Conditions",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Terms and Conditions | MealMate - Food Delivery Platform",
+        description:
+            "Read the terms and conditions for using MealMate platform.",
+        images: ["https://i.ibb.co/99pqNzY5/mealmate.png"],
+    },
+    metadataBase: new URL("https://mealmate-lemon.vercel.app"),
+};
 
 export default function TermsPage() {
     return (

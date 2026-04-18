@@ -23,7 +23,7 @@ const navItems = [
     { name: "Home", href: "/" },
     { name: "Meals", href: "/meals" },
     { name: "Providers", href: "/providers" },
-    { name: "Offers", href: "/offers" },
+    // { name: "Offers", href: "/offers" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
 ];

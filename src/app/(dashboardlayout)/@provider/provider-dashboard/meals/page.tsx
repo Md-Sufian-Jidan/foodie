@@ -4,6 +4,59 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DollarSign, Package, Plus, UtensilsCrossed } from "lucide-react";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "My Meals | MealMate - Fresh Multi-Vendor Food Delivery Platform",
+    description:
+        "Manage your meals, availability, and pricing as a provider on MealMate platform.",
+    keywords: [
+        "my meals",
+        "provider meals",
+        "meal management",
+        "mealmate meals",
+    ],
+    authors: [{
+        name: "Md Abu Sufian Jidan",
+        url: "https://mdabusufianjidan.vercel.app"
+    }],
+    openGraph: {
+        title: "My Meals | MealMate - Fresh Food Delivered Fast",
+        description:
+            "Manage your meals and offerings.",
+        url: "https://mealmate-lemon.vercel.app/dashboard/provider/meals",
+        siteName: "MealMate",
+        type: "website",
+        images: [
+            {
+                url: "https://i.ibb.co/99pqNzY5/mealmate.png",
+                width: 1200,
+                height: 630,
+                alt: "MealMate My Meals",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "My Meals | MealMate - Food Delivery Platform",
+        description:
+            "Manage your meals and offerings.",
+        images: ["https://i.ibb.co/99pqNzY5/mealmate.png"],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        nocache: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-snippet': -1,
+            'max-image-preview': 'large',
+            'max-video-preview': -1,
+        }
+    },
+    metadataBase: new URL("https://mealmate-lemon.vercel.app"),
+};
 
 export default async function MealsPage() {
     const { data, error, status } = await getProviderMeals();

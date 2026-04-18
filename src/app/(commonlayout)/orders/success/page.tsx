@@ -6,6 +6,48 @@ import confetti from "canvas-confetti";
 import { CheckCircle, Home, Package } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Order Success | MealMate - Fresh Multi-Vendor Food Delivery Platform",
+    description:
+        "Thank you for your order! Track your meal delivery in real-time and enjoy fresh, delicious food delivered to your doorstep.",
+    keywords: [
+        "order success",
+        "meal delivery",
+        "order tracking",
+        "food delivery",
+        "mealmate order",
+    ],
+    authors: [{
+        name: "Md Abu Sufian Jidan",
+        url: "https://mdabusufianjidan.vercel.app"
+    }],
+    openGraph: {
+        title: "Order Success | MealMate - Fresh Food Delivered Fast",
+        description:
+            "Thank you for your order! Track your meal delivery in real-time.",
+        url: "https://mealmate-lemon.vercel.app/orders/success",
+        siteName: "MealMate",
+        type: "website",
+        images: [
+            {
+                url: "https://i.ibb.co/99pqNzY5/mealmate.png",
+                width: 1200,
+                height: 630,
+                alt: "MealMate Order Success",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Order Success | MealMate - Food Delivery Platform",
+        description:
+            "Thank you for your order! Track your meal delivery in real-time.",
+        images: ["https://i.ibb.co/99pqNzY5/mealmate.png"],
+    },
+    metadataBase: new URL("https://mealmate-lemon.vercel.app"),
+};
 
 export default function OrderSuccessPage() {
     useEffect(() => {
@@ -160,4 +202,4 @@ export default function OrderSuccessPage() {
             </div>
         </div>
     );
-}
+};

@@ -1,6 +1,51 @@
 import { MealsClient, MealsHero } from "@/components/modules/meals";
 import { mealService } from "@/services/meal.service";
 import { SearchParamsType } from "@/types/meal.type";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Meals | MealMate - Fresh Multi-Vendor Food Delivery Platform",
+    description:
+        "Explore a wide variety of delicious meals from top local vendors. Filter by cuisine, diet, spice level, and price to find your perfect dish.",
+    keywords: [
+        "meals",
+        "food",
+        "delivery",
+        "cuisine",
+        "dietary",
+        "spice level",
+        "mealmate meals",
+        "order food online",
+    ],
+    authors: [{
+        name: "Md Abu Sufian Jidan",
+        url: "https://mdabusufianjidan.vercel.app"
+    }],
+    openGraph: {
+        title: "Meals | MealMate - Fresh Food Delivered Fast",
+        description:
+            "Explore a wide variety of delicious meals from top local vendors.",
+        url: "https://mealmate-lemon.vercel.app/meals",
+        siteName: "MealMate",
+        type: "website",
+        images: [
+            {
+                url: "https://i.ibb.co/99pqNzY5/mealmate.png",
+                width: 1200,
+                height: 630,
+                alt: "MealMate Meals",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Meals | MealMate - Food Delivery Platform",
+        description:
+            "Explore a wide variety of delicious meals from top local vendors.",
+        images: ["https://i.ibb.co/99pqNzY5/mealmate.png"],
+    },
+    metadataBase: new URL("https://mealmate-lemon.vercel.app"),
+};
 
 async function getMeals(searchParams: SearchParamsType) {
     try {
